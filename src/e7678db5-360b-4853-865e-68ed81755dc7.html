@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Starlight Shores</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('e7678db5-360b-4853-865e-68ed81755dc7/d511b2bd-1d1b-4a5c-bd30-31e4f7c96bb7.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="e7678db5-360b-4853-865e-68ed81755dc7/de77b924-62f5-4f75-87af-1d30d034a44c.png"/> Starlight Shores</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="e7678db5-360b-4853-865e-68ed81755dc7/15b8a341-a043-4d8b-b5ba-997c68f88ade.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-30/03/2025">30/03/2025</a> 23:13:52</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-30/03/2025">30/03/2025</a> 23:15:28</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-13/04/2020">13/04/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Simulator">Simulator</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Visual Novel">Visual Novel</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Delphinium Interactive">Delphinium Interactive</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Penguin Pop Games">Penguin Pop Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://tidalblossoms.itch.io/starlight-shores" target="_blank">Itch</a><br/><a href="https://twitter.com/TidalBlossoms" target="_blank">Twitter</a><br/><a href="https://store.steampowered.com/app/1551010" target="_blank">Steam</a><br/><a href="https://www.twitch.tv/directory/game/Starlight%20Shores" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_tag_ascendente_name_ascendente.html#quicklink-[GGDeals] Synced">[GGDeals] Synced</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<p><strong>Starlight Shores launched on October 30th, 2020!</strong><br></p>
+<p><img src="https://img.itch.zone/aW1nLzMzNjczMjMucG5n/original/4j6Mi6.png" loading="lazy"></p>
+<p><strong>The Story:</strong></p>
+<p>After your childhood friend Theo wins a weekend getaway to the town of Seaside, you prepare to spend your birthday in paradise.&nbsp;It's been months since you last saw Theo, and she's incredibly excited to spend the weekend together.&nbsp;</p>
+<p>She invites her roommate&nbsp;Lena to join the group, and Theo extends an invitation to your friend Alec. After parting ways to attend different colleges, it's just the get-together that&nbsp;you need to reconnect.&nbsp;</p>
+<p><img src="https://img.itch.zone/aW1nLzM1NzI0MDUucG5n/original/uqlM0W.png" loading="lazy"><br></p>
+<p>Everything seems to be coming together perfectly... until Alec insists on driving by himself. You arrive at the cottage before him, certain that he's ditched the group. A short while later, he calls to announce that he's&nbsp;bringing along an uninvited guest. <br></p>
+<p>Although Erika may be from the same small-town as most of the group, that's about the only thing you share in common...&nbsp;<br></p>
+<p>Will you enjoy your night with Theo and wish on a star?</p>
+<p><strong>The Cast:</strong><br></p>
+<p><strong>Theo</strong></p>
+<p><img src="https://img.itch.zone/aW1nLzM1NTI4NzkucG5n/original/Xs2L%2BJ.png" loading="lazy"></p>
+<p>Theo is your childhood friend. Although initially shy with strangers, Theo has a great sense of humour and loves to joke around with her friends. She prefers to have a tight-knit group and doesn’t open up to just anyone. She studies photography at the same college as her roommate Lena and loves spending time with her. Theo won a draw for a cottage getaway in the town of Seaside and is your host for the weekend.</p>
+<p><br></p>
+<p><strong>Lena</strong><br></p>
+<p><img src="https://img.itch.zone/aW1nLzM1NTI4ODEucG5n/original/1QrrBA.png" loading="lazy"></p>
+<p>Lena is Theo’s roommate… and replacement best friend. You don’t know much about her, or even what she’s studying. From what you’ve seen on Friendex, Lena is a vibrant and outgoing person. She’s always dyeing her hair different colours and wearing cute clothes. According to her online bio, in her spare time she enjoys hiking and playing piano.<br><br></p>
+<p><strong>Alec</strong></p>
+<p><img src="https://img.itch.zone/aW1nLzM1NTI4ODkucG5n/original/JWmLf6.png" loading="lazy"></p>
+<p>Alec is a friend from your hometown who is attending the same college. You both have similar hobbies like&nbsp;gaming, eating out, and playing soccer. Naturally, renting a student house with Alec seemed like a great idea… until he started dating. He jumps from girl to girl, never committing despite constantly whining that he wants a serious relationship. His latest date, Erika, tagged along to the cottage without an invitation. Lately, Alec has been pissing you off.<br></p>
+<p><br></p>
+<p><strong>Erika</strong><br></p>
+<p><img src="https://img.itch.zone/aW1nLzM1NTI4OTAucG5n/original/CSswXF.png" loading="lazy"><br></p>
+<p>A year younger than you, Erika is from the same hometown. You don’t remember much about her, or ever talking to her…</p>
+<p><strong>Our Team-</strong><br></p>
+<p><strong>Sam Kerr- Creative Director and Lead Developer</strong></p>
+<p><strong>Nanae Lia- Creative Director, CG &amp; Character Artist</strong></p>
+<p><strong>Tanuma San- CG &amp; Background Artist</strong></p>
+<p><strong>Alcaknight- Lead Composer</strong><br></p>
+<p><strong>BackgroundTK- Outdoor Background Artist</strong></p>
+<p><strong>Re.Alice- Logo Designer</strong></p>
+<p><strong>A special thanks to Uncle Mugen,&nbsp;</strong><strong>CC backgrounds were from his lemmasoft page!<br><br>Join our Discord today!&nbsp;<a href="https://t.co/yIcm7mq9m7?amp=1" referrerpolicy="origin" rel="nofollow noopener">https://t.co/yIcm7mq9m7?amp=1</a></strong></p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

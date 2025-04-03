@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Reventure</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('de5aff6f-2879-4f64-ad64-79e42f99006d/b83f5f30-2b26-4533-9704-b629c7d5c874.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="de5aff6f-2879-4f64-ad64-79e42f99006d/33c1af05-3fba-448f-a06d-08cc362e2ef7.png"/> Reventure</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="de5aff6f-2879-4f64-ad64-79e42f99006d/20f6f644-59c9-4b23-b43e-d726b3d23f8e.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>21m 58s</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-16/03/2025">16/03/2025</a> 0:33:09</TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-16/03/2025">16/03/2025</a> 0:14:50</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-16/03/2025">16/03/2025</a> 0:16:42</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Jogado">Jogado</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-04/06/2019">04/06/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-71">71</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Platform">Platform</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Pixelatto">Pixelatto</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Pixelatto">Pixelatto</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/900270/Reventure/" target="_blank">Steam</a><br/><a href="https://www.gog.com/game/reventure" target="_blank">GOG</a><br/><a href="https://www.twitch.tv/directory/game/Reventure" target="_blank">Twitch</a><br/><a href="https://play.google.com/store/apps/details?id=com.Pixelatto.Reventure" target="_blank">Android</a><br/><a href="https://apps.apple.com/us/app/reventure/id1501817956" target="_blank">iPhone</a><br/><a href="https://apps.apple.com/us/app/reventure/id1501817956" target="_blank">iPad</a><br/><a href="https://pixelatto.com/store/reventure/" target="_blank">Official</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<h4>An adventure with 100 different endings</h4>You are a wannabe hero who is supposed to do hero-ish things but sometimes blows that off and does crazy stuff instead.<h4>Features:</h4><ul class="bb_ul"><li><b>One hundred different endings</b>
+<br>
+Choose your path, every decision leads to a new ending.
+<br>
+Will you find the real one? Is there such a thing?
+<br>
+Only one way to know...
+<br>
+</li><li><b>Lots of "Aha!" moments</b>
+<br>
+The world doesn't change with each new game, you do.
+<br>
+Well, actually it DOES change, but that's a secret for you to find out.
+<br>
+</li><li><b>A big bunch of unlockable stuff</b>
+<br>
+New playable characters, hints, costumes, visual effects and more!
+<br>
+</li><li><b>Bazillions of secrets and pop-culture references</b>
+<br>
+They are, you know, secrets. So we won't spoil them here ;)
+<br>
+</li><li><b>Magic</b>
+<br>
+Even a simple-looking-yet-amazing game like this takes a lot of time and big piles of money to make, but you can get it for only a few bucks.
+<br>
+How's that for magic?
+<br>
+</li><li><b>Time travel, battle royale fights, mimics, permadeath, shotguns, mining, resource gathering, base building, global leaderboards, farming...</b>
+<br>
+Ok, we may have had exaggerated on that one...
+<br>
+OR HAVE WE???
+<br>
+</li><li><b>Humor</b>
+<br>
+Yup, there's that too.
+<br>
+Available in many flavours.
+<br>
+</li><li><b>A beautiful OST</b>
+<br>
+Don't believe us? Listen to it <a href="https://danielparejo.bandcamp.com/album/lonks-adventure-ost" >here</a>.</li></ul><h4>Here's how to play Reventure in 8 easy steps:</h4><ul class="bb_ul"><li> Step 1: Adventure calls... Wake up, hero!
+<br>
+<img src="https://items.gog.com/reventure/step1.png">
+</li><li> Step 2: Meet your mentor and gear up for glory...
+<br>
+<img src="https://items.gog.com/reventure/step2.png">
+</li><li> Step 3: Then... Embark on your quest!
+<br>
+<img src="https://items.gog.com/reventure/step3.png">
+</li><li> Step 4: Ok, don't embark...
+<br>
+<img src="https://items.gog.com/reventure/step4.png">
+</li><li> Step 5: Face the consequences...
+<br>
+<img src="https://items.gog.com/reventure/step5.png">
+</li><li> Step 6: Rise again...
+<br>
+<img src="https://items.gog.com/reventure/step6.png">
+</li><li> Step 7: Fix your past mistakes...
+<br>
+<img src="https://items.gog.com/reventure/step7.png">
+</li><li> Step 8: And become a legend!
+<br>
+<img src="https://items.gog.com/reventure/step8.png" ></li></ul><i>Disclaimer: this is just an orientative guide, you probably won't become a legend on your second attempt.</i>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

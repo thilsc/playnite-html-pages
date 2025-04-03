@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>WE ARE FOOTBALL 2024</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('62b93531-cb11-44c0-ad1a-aa3ec25d428a/7f54977c-db34-434c-8131-113560804884.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="62b93531-cb11-44c0-ad1a-aa3ec25d428a/5af63bb9-41b6-4ec8-9ca5-e463ca7b8556.png"/> WE ARE FOOTBALL 2024</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="62b93531-cb11-44c0-ad1a-aa3ec25d428a/64baa772-48a2-460a-b9ee-44d3a2a42b03.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-28/03/2025">28/03/2025</a> 20:30:19</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-28/03/2025">28/03/2025</a> 20:31:39</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-04/03/2024">04/03/2024</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Simulator">Simulator</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Sport">Sport</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Winning Streak Games">Winning Streak Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Handy Games">Handy Games</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-THQ Nordic">THQ Nordic</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/1951410/WE_ARE_FOOTBALL_2024/" target="_blank">Steam</a><br/><a href="https://handy-games.com/en/games/we-are-football-2024/" target="_blank">Official</a><br/><a href="https://www.gog.com/en/game/we_are_football_2024" target="_blank">GOG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<p>Welcome to <strong>WE ARE FOOTBALL 2024</strong> – the NEW football management experience from the creators of the legendary <strong>On the Ball</strong> and <strong>EA SPORTS FIFA Manager</strong> Series! Dive into the world of football like never before. Choose an existing club or start your own. Manage either men or women, lead your club to new heights, and become the next manager legend!</p><p> </p><p>Be there with your team on the pitch. In our immersive 3D game engine, you can directly influence the action on the pitch through instructional shouts. Simulate the same game a thousand times over, witness matches 50 years into the future or switch between games in conference mode on match day. Relive highlights, analyze goals, and enjoy a comprehensive season summary.</p><p> </p><p><strong>WE ARE FOOTBALL 2024</strong> offers an extensive feature set to adapt the game to your needs, including a powerful external editor to set up league systems, clubs, players, managers, employees, referees, sponsors, fan chants, derbies, and more. Configure the game to your skill level and preferences with over 100 options and difficulty settings to make this YOUR road to glory.</p><p> </p><p>Now immerse yourself in the thrill of football management with <strong>WE ARE FOOTBALL 2024</strong>!</p><p> </p><p><img src="https://items.gog.com/we_are_football_2024/01_WAF2024_Teaser-Social_England_616x200_25fps-3e334.gif"></p><p> </p><p><strong>KEY FEATURES</strong></p><p><strong> </strong></p><p><strong>User Interface and Technical Enhancements:</strong></p><p>  - Clear menu with tabs and customizable wing menus for easy navigation</p><p>  - In-game editor for changing club and player data at any time</p><p>  - Over 12,000 generic AI-generated pictures and aging youth players for realism<br>  - 21:9 monitor support</p><p>  - Hotseat multiplayer for up to 4 players</p><p>  </p><p><strong>Game Content:</strong></p><p>  - 3 game modes for club play: Free club selection, club creation, and career mode</p><p>  - Develop your own managerial skills and use individual skill development trees for each player</p><p>  - Diverse manager functions (finance, sponsors, HR, organization, fan support, and more)</p><p>  - Organize your own tournaments and preseason tours</p><p>  - Extensive options for play styles, formations, and other tactical instructions</p><p>  - Modern training and realistic training schedules, including training groups</p><p>  - Team chemistry with player relationships, hierarchies, and effects of player hobbies</p><p>  - Simply click on players to watch their previous goals</p><p>  - Comprehensive youth area with screening days, headhunting campaigns, youth boarding schools, and expandable international youth centers for early talent discovery</p><p>  - Improved transfer market where your personal reputation as a negotiator counts</p><p>  - Stadium editor that lets you expand, upgrade, and customize your home ground</p><p>  - Expandable 3D club grounds with new buildings and many new details and improvements</p><p>  - Optional simulation of the manager's private life, including family and children who can start a professional football career or become a department head at your club</p><p>  </p><p><strong>National Team Integration:</strong></p><p>  - Separate European Championship and World Cup modes for both men and women</p><p>  - Option to choose a national team to manage directly at the start of the game or long-term takeover offers for national teams during gameplay</p><p> </p><p><strong>Match:</strong></p><p>  - 3D match display with 9 cameras, slow motion, replay, live rating changes, and optional action boxes with additional information within scenes</p><p>  - See your tactical instructions implemented on the pitch</p><p>  - New "Tactical Analysis" option provides information on how the result came about</p><p>  - Short or long 3D scenes and an alternative quick calculation</p><p>  - Intervene during the match in decision-making situations by giving commands to the players</p><p> </p><p><strong>Editor:</strong></p><p>  - Edit any country in the world with both women’s and men's leagues</p><p>  - Fully editable league systems with promotion/relegation regulations, cups, and playoffs</p><p>  - Automatic creation of leagues, teams, and players</p><p>  - Extensive editors for logos and jerseys with integration options for your own graphics</p><p>  - Automatic conversion of existing WAF databases</p><p> </p><p><img src="https://items.gog.com/we_are_football_2024/02_WAF2024_Logo_Steam-e6e2a.png"></p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

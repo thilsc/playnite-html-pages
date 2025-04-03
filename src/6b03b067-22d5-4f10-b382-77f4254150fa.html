@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>SimCity 4 Deluxe</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('6b03b067-22d5-4f10-b382-77f4254150fa/d818e465-0d19-4367-8d27-ed4944888db4.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src=""/> SimCity 4 Deluxe</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="6b03b067-22d5-4f10-b382-77f4254150fa/946cc02c-4c2d-428a-a170-047f59fd48ba.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>3d 10h 25m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-12/11/2024">12/11/2024</a> 23:20:34</TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-11/02/2025">11/02/2025</a> 12:35:29</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-11/02/2025">11/02/2025</a> 12:38:13</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Jogado">Jogado</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-22/09/2003">22/09/2003</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Simulator">Simulator</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Maxis">Maxis</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Aspyr Media">Aspyr Media</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Electronic Arts">Electronic Arts</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://en.wikipedia.org/wiki/SimCity_4#SimCity_4:_Deluxe_Edition" target="_blank">Wikipedia</a><br/><a href="https://store.steampowered.com/app/24780" target="_blank">Steam</a><br/><a href="http://www.simcity.com/product/simcity4" target="_blank">Official</a><br/><a href="https://www.gog.com/game/simcity_4_deluxe_edition" target="_blank">GOG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					Obtenha SimCity 4 e SimCity™ 4 Hora do Rush em um conveniente pacote. Crie, desenvolva e dê vida ao seu ambiente urbano ideal. Lute contra desastres realistas e fantasiosos. Jogue a qualquer momento, em qualquer lugar. Governe a sua metrópole virtual do jeito que quiser com SimCity 4.<br>Em SimCity 4, você não só constrói a sua cidade, mas também dá vida a ela. Crie uma megalópole costurando cidades, indo de comunidades residenciais a um centro urbano de alta tecnologia ou de um destino paradisíaco a uma vila agrícola. Você pode criar uma região de cidades conectadas que compartilham e disputam recursos conectadas por uma rede de transporte totalmente integrada. Use poderes &quot;divinos&quot; para criar cordilheiras, vales e rios para construir a metrópole mais realista imaginável. A nova engine de simulação oferece feedback imediato para que você possa reagir às necessidades de uma metrópole em expansão. Agora edifícios individuais e os seus lotes dão-lhe feedback. Use os recursos &quot;Meu Sim&quot; para personalizar o seu Sim, movê-lo para qualquer área e acompanhar a sua experiência na cidade, além de obter feedback instantâneo sobre o progresso da cidade. Cada decisão tem um impacto maior e lhe dá a habilidade de responder com maior eficácia.<br>Inclui SimCity™ 4 Hora do Rush: Tenha o controle definitivo sobre a rede de transporte da cidade ao comandar completamente estradas, trilhos, o espaço aéreo, os mares e até mesmo veículos. As missões &quot;Você Dirige&quot; serão apresentadas a você para resolver, como perseguir um ladrão de banco ou prender um ladrão de carro. Se missões forem completadas com sucesso, você será recompensado com novos edifícios e veículos. Ao consertar problemas e completar missões, a sua aprovação subirá e os Sims pipocarão na sua cidade. Escolha vários novos tipos de estrada incluindo largas avenidas, pontes suspensas e estradas de mão única, além de mapear redes regionais que levam Sims de uma cidade à outra. Opções adicionais incluem criar uma metrópole com um conjunto de edifícios com visual euro-contemporâneo ou personalizar novas criações colocando placas e sinais em ruas, montanhas, vizinhanças e pontos de interesse. Cause o caos com desastres novos, como uma invasão alienígena, acidentes gigantescos em cruzamentos férreos e a ocasional batidinha no trânsito. Há também novos tutoriais disponíveis para ajudar você a pegar o jeito. Novos níveis de dificuldade também estão disponíveis para que você possa criar a cidade dos seus sonhos.<h2 class="bb_tag">Compatibilidade com sistemas</h2>Testes de desempenho e compatibilidade com hardware foram realizados com SimCity na época do lançamento original. Enquanto a experiência clássica do SimCity 4 continua a mesma, problemas de desempenho e gráficos inesperados com sistemas mais novos podem ocorrer. Se você tiver qualquer problema de desempenho ou gráfico, recomendamos rodar no modo janela ou ativar o modo de compatibilidade para manter a experiência desejada.
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

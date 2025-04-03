@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Resident Evil 3</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('94d5d01c-901c-4fc8-8a9b-9b14d8112161/1e7e8733-d55f-4012-b16e-21aca01472d8.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="94d5d01c-901c-4fc8-8a9b-9b14d8112161/60ebe449-0651-44da-9b32-42d4fb88727f.png"/> Resident Evil 3</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="94d5d01c-901c-4fc8-8a9b-9b14d8112161/78f64224-af47-47a8-a51a-c2bf6359a199.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-16/03/2025">16/03/2025</a> 0:23:58</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-16/03/2025">16/03/2025</a> 0:24:03</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-22/09/1999">22/09/1999</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-81">81</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Puzzle">Puzzle</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Capcom Planning Room 2">Capcom Planning Room 2</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Capcom">Capcom</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Eidos Interactive">Eidos Interactive</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Nintendo">Nintendo</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Virgin Interactive Entertainment">Virgin Interactive Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://residentevil.fandom.com/wiki/Resident_Evil_3:_Nemesis" target="_blank">Wikia</a><br/><a href="https://en.wikipedia.org/wiki/Resident_Evil_3:_Nemesis" target="_blank">Wikipedia</a><br/><a href="https://www.twitch.tv/directory/game/Resident%20Evil%203:%20Nemesis" target="_blank">Twitch</a><br/><a href="https://www.gog.com/en/game/resident_evil_3" target="_blank">GOG</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<div lang="ja">
+<img src="https://items.gog.com/resident_evil_3/RE3.png">
+<h4>あれは血の中に潜んでいる…</h4>
+<br>
+Join Jill Valentine, the heroine and amazing survivor of the notorious disaster at the mansion, as her nightmare continues. After resigning from S.T.A.R.S. Jill now prepares to head out of Raccoon City...but it's not going to be easy. Caught in a town crawling with flesh eating zombies, more than ever she must rely on brute force and cunning to find a way to escape alive. This unique adventure intricately reveals more of Umbrella Corporation's nightmarish plot and picks up just hours before the events from <a href="https://www.gog.com/game/resident_evil_2">Resident Evil™ 2</a>.<br>
+<br>
+あの忌まわしい洋館事件の生存者である「ジル・バレンタイン」を操り、悪夢の続きを目撃せよ。S.T.A.R.S.を辞め、ラクーンシティからの脱出を目論む彼女を待っていたのは、新たな困難だった。人間を捕食するゾンビで溢れた街から生きて逃げ出すには、知恵と力を最大限に振り絞らなければならない。ジルの冒険を通じて、アンブレラ社による壮大な計画の全容が徐々に明らかとなり、『バイオハザード 2』の出来事の数時間前の様相が語られる。<br>
+<br>
+<video muted="" preload="auto" loop="" autoplay="autoplay" style="margin: auto;display:block;width:100%"> <source src="https://items.gog.com/resident_evil_3/mp4/RE3_count.mp4" type="video/mp4"></video>
+ <br>
+<h4><b>The third entry in the series received the same treatment as its predecessors – we brought it back and made it the best version possible. Here's what Resident Evil™ 3 on GOG offers:</b></h4>
+ 
+
+<ul>
+<li>Full compatibility with Windows 10 and Windows 11.</li>
+<li>6 localizations of the game included (English, German, French, Italian, Spanish, Japanese).</li>
+<li>Mercenaries Mode included.</li>
+<li>Improved DirectX game renderer.</li>
+<li>New rendering options (Windowed Mode, Vertical Synchronization Control, Gamma Correction, Integer Scaling and more).</li>
+<li>Improved graphics engine initialization and restart.</li>
+<li>Improved video subtitles.</li>
+<li>Improved options dialog.</li>
+<li>Issue-less task switching.</li>
+<li>Improved mouse cursor visibility.</li>
+<li>Full support for modern controllers (Sony DualSense, Sony DualShock4, Microsoft Xbox Series, Microsoft Xbox One, Microsoft Xbox 360, Nintendo 
+Switch, Logitech F series and many more) with optimal button binding regardless of the hardware, hotplugging and wireless mode.</li>
+</ul>
+ 
+<br>
+<video muted="" preload="auto" loop="" autoplay="autoplay" style="margin: auto;display:block;width:100%"> <source src="https://items.gog.com/resident_evil_3/mp4/RE3_cell.mp4" type="video/mp4"></video>
+<br>
+<h4><b>Our version of the game keeps all the original content intact – 1999's description is no exception. Take a trip down memory lane and see how Resident Evil™ 3 was described to gamers when it launched all those years ago:</b></h4>
+<br>
+<br>
+<b>FEATURES:</b>
+
+<ul><br>
+<li>Third person perspective.</li>
+<li>3D & 2D graphics</li>
+<li>Prerendered graphics</li>
+<li>SCI-Fi, Horror & Zombies themes.</li>
+<li>More zombies, more terror, and even more evil.</li>
+<li>More challenging enemies that come back to life at any time.</li>
+<li>Face off against the most terrifying mutations stalking the streets of Raccoon City.</li>
+<li>More detailed character actions: Try the dodge move to avoid an enemy's attack.</li>
+<li>Interact with the environment like never before: Use background objects defensively.</li>
+<li>A unique new drama which reveals more details of Umbrella Corporation's devious activities from the Resident Evil series.</li>
+</ul>
+
+<h4><b>シリーズ3作目となる本作『バイオハザード 3』でも、過去2作品と同じく、GOG版を完全保存版と位置づけ、さまざまな面で最適化や調整を実施。変更点は次のとおり：</b></h4>
+ 
+
+<ul>
+<li>Windows 10とWindows 11との完全な互換性の実現</li>
+<li>6言語版への対応（英語、ドイツ語、フランス語、イタリア語、スペイン語、日本語）</li>
+<li>「ザ・マーシナリーズ」モードに対応</li>
+<li>DirectXゲームレンダラーの調整</li>
+<li>新しい画面描画オプションの追加（ウィンドウモード、垂直同期コントロール、ガンマ補正、整数スケーリングほか）</li>
+<li>グラフィックエンジンの初期化と再起動の処理の改善</li>
+<li>映像字幕の改善</li>
+<li>設定画面のダイアログの改善</li>
+<li>タスク切替時の処理の改善</li>
+<li>マウスカーソルの視認性の改善</li>
+<li>メジャーなコントローラー（Sony DualSense、Sony DualShock4、Microsoft Xbox Series、Microsoft Xbox One、Microsoft Xbox 360、Nintendo Switch、Logitech Fシリーズほか多数）にホットプラグ機能やワイヤレスモードも含めて完全対応し、コントローラーごとに最適なボタン配置を提供</li>
+</ul>
+ 
+
+<h4><b>GOG版では、1999年に発売された本作オリジナルの要素を完全再現。『バイオハザード 3』が当時どのようにゲーマーに紹介されていたか、そのテキストを掲載（注：当時の英語版準拠のテキストとなります）：</b></h4>
+<br>
+<br>
+<b>特徴：</b><br>
+ 
+<ul>
+<li>三人称視点</li>
+<li>3D＆2Dグラフィック</li>
+<li>プリレンダーグラフィック</li>
+<li>SF・ホラー・ゾンビにまたがるテーマ</li>
+<li>前作以上のゾンビの数をはじめ、さらなる恐怖がプレイヤーを待ち受ける</li>
+<li>倒しても復活する高難度の敵も多数登場</li>
+<li>ラクーンシティをさまよう最凶のクリーチャーを退けろ</li>
+<li>敵の攻撃を避ける緊急回避など、キャラクターのアクションがさらにパワーアップ</li>
+<li>背景のオブジェクトを使って身を守るなど、環境を使いこなせ</li>
+<li>『バイオハザード』シリーズにおけるアンブレラ社の邪悪な作戦を明るみに出す、ドラマチックな物語が展開</li>
+</ul>
+ 
+
+<p class="module">How to rebind keyboard/gamepad keys?<br>
+<br>
+Press F1 key on the keyboard, go to Keyboard or Controls tab, right click on the key bind and select "Add Key".</p>
+ 
+
+<hr> <img src="https://items.gog.com/RE/DJCTQ_16.png"> <img src="https://items.gog.com/RE/IFCO_18.png"> <img src="https://items.gog.com/RE/ACB_MA15+.png"> <img src="https://items.gog.com/RE/FPB_16.png"> <img src="https://items.gog.com/RE/GCAM_18.png"> <img src="https://items.gog.com/RE/RARS_PCBP_18.png"> <img src="https://items.gog.com/RE/CERO_17.png"> <img src="https://items.gog.com/RE/violence_49.png"> <img src="https://items.gog.com/RE/CSRR_18.png">
+</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

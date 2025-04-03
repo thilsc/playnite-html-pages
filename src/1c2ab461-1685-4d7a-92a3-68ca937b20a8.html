@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Resident Evil 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('1c2ab461-1685-4d7a-92a3-68ca937b20a8/1555472e-e1cb-49bd-b240-e30566021472.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="1c2ab461-1685-4d7a-92a3-68ca937b20a8/8c5d96e9-fbd0-45f8-ad3c-bcf2d9578e36.png"/> Resident Evil 2</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="1c2ab461-1685-4d7a-92a3-68ca937b20a8/4acb5353-ca17-41fa-89e4-4058898ba1bc.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>2m 6s</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-16/03/2025">16/03/2025</a> 0:21:32</TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-16/03/2025">16/03/2025</a> 0:21:09</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-16/03/2025">16/03/2025</a> 0:21:16</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Jogado">Jogado</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-25/01/2019">25/01/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-88">88</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-93">93</a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Capcom Development Division 1">Capcom Development Division 1</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Capcom">Capcom</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://twitter.com/RE_Games" target="_blank">Twitter</a><br/><a href="https://www.instagram.com/re_games" target="_blank">Instagram</a><br/><a href="https://www.youtube.com/user/ResidentEvil" target="_blank">YouTube</a><br/><a href="https://www.reddit.com/r/residentevil" target="_blank">Reddit</a><br/><a href="http://www.residentevil2.com/" target="_blank">Official</a><br/><a href="http://residentevil.wikia.com/wiki/Resident_Evil_2_(remake)" target="_blank">Wikia</a><br/><a href="https://store.steampowered.com/app/883710/RESIDENT_EVIL_2__BIOHAZARD_RE2" target="_blank">Steam</a><br/><a href="https://en.wikipedia.org/wiki/Resident_Evil_2_(2019_video_game)" target="_blank">Wikipedia</a><br/><a href="https://www.facebook.com/residentevil" target="_blank">Facebook</a><br/><a href="https://www.twitch.tv/directory/game/Resident%20Evil%202" target="_blank">Twitch</a><br/><a href="https://apps.apple.com/app/resident-evil-2/id1640632432" target="_blank">iPhone</a><br/><a href="https://apps.apple.com/app/resident-evil-2/id1640632432" target="_blank">iPad</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<div lang="ja">
+<img src="https://items.gog.com/resident_evil_2/RE2.png">
+<br>
+
+<h4>そこを歩く、という恐怖。</h4>
+<br>
+Immerse yourself in the ultimate test of survival. Face your fears in this terror-filled classic edition of Resident Evil™ 2 for PC containing more horror, more mutant creatures and more evil than before.<br>
+<br>
+生き残りをかけた究極の体験に没入せよ。前作を越える邪悪な怪物や恐怖を引っ提げて、PC向け『バイオハザード 2』クラシック版が登場。<br>
+<br>
+<video muted preload="auto" loop autoplay="autoplay" style="margin: auto;display:block;width:100%"> <source src="https://items.gog.com/resident_evil_2/mp4/doors_re2_quote.mp4" type="video/mp4"></video>
+<b><h4>Just like with Resident Evil™, we made sure GOG's version of the second entry in the series is the best it can be. Here's what we did to make this masterpiece last forever:</h4></b><br><br>
+
+<ul>
+<li>Full compatibility with Windows 10 and Windows 11.</li>
+<li>6 localizations of the game included (English, German, French, Italian, Spanish, Japanese).</li>
+<li>Improved DirectX game renderer.</li>
+<li>New rendering options (Windowed Mode, Vertical Synchronization Control, Gamma Correction, Integer Scaling and more).</li>
+<li>Improved audio volume and panning.</li>
+<li>Improved cutscenes and subtitles.</li>
+<li>Improved savegame manager.</li>
+<li>Improved game video player.</li>
+<li>Issue-less game exit.</li>
+<li>Improved game registry settings.</li>
+<li>Improved key-binding settings and audio settings screens.</li>
+<li>Improved end credits in the German version.</li>
+<li>Fixed issues with Rooms 114 and 115 (missing text), Room 210 (invisible diary), and Room 409 (looping sound).</li>
+<li>Full support for modern controllers (Sony DualSense, Sony DualShock4, Microsoft Xbox Series, Microsoft Xbox One, Microsoft Xbox 360, Nintendo 
+Switch, Logitech F series and many more) with optimal button binding regardless of the hardware, hotplugging and wireless mode.</li>
+<li>4th Survivor and Tofu modes enabled from the very beginning.</li></ul>
+<br>
+<img src="https://items.gog.com/resident_evil_2/RE2_2.png">
+<h4><b>Our version of the game keeps all the original content intact – 1998's description is no exception. Take a trip down memory lane and see how Resident Evil™ 2 was described to gamers when it launched all those years ago:</b></h4><br><br>
+<b>FEATURES:</b>
+<ul><br>
+<li>2 Separate Adventures! Command Leon Kennedy, a rookie cop who stumbles onto the carnage reporting for his first duty, or play as Claire Redfield, desperately searching for her missing brother.</li>
+<li>Cutting edge 3-D accelerated graphics that create a terrifying, photo-realistic experience.</li>
+<li>3-D accelerated and non 3-D accelerated settings to maximize performance whatever your setup.</li>
+<li>Features complete versions of both original U.S. and the original Japanese versions of Resident Evil™ 2.</li>
+<li>New Extreme Battle Mode: Battle your way through hordes of zombies as you play the hyper-intensive challenge that changes every time you play.</li>
+<li>All new Resident Evil™ 2 picture gallery.</li>
+<li>The game's secret scenario available from the very beginning (no need to finish it under certain conditions first).</li><br></ul>
+
+<b><h4>前作『バイオハザード』と同様に、本作においてもGOG版ではさまざまな最適化を実施。永久に手元に残せる決定版として施した改善は次のとおり：</h4></b><br><br>
+
+<ul>
+<li>Windows 10とWindows 11との完全な互換性の実現/li>
+<li>6言語版への対応（英語、ドイツ語、フランス語、イタリア語、スペイン語、日本語）</li>
+<li>DirectXゲームレンダラーの調整</li>
+<li>新しい画面描画オプションの追加（ウィンドウモード、垂直同期コントロール、ガンマ補正、整数スケーリングほか）</li>
+<li>オーディオの音量と音像定位の改善</li>
+<li>カットシーンと字幕の改善</li>
+<li>セーブデータ管理機能の改善</li>
+<li>ゲーム内のビデオ再生機能の調整</li>
+<li>ゲーム終了時の処理の改善</li>
+<li>ゲームのレジストリ設定の調整</li>
+<li>キーバインド設定とオーディオ設定画面の改善</li>
+<li>ドイツ語版のスタッフクレジットの改善</li>
+<li>114号室と115号室のテキスト表示に関する問題の修正、210号室の日記が見えない問題の修正、409号室のサウンドループ問題の修正</li>
+<li>メジャーなコントローラー（Sony DualSense、Sony DualShock4、Microsoft Xbox Series、Microsoft Xbox One、Microsoft Xbox 360、Nintendo Switch、Logitech Fシリーズほか多数）にホットプラグ機能やワイヤレスモードも含めて完全対応し、コントローラーごとに最適なボタン配置を提供</li>
+<li>「4th Survivor」と「豆腐」モードをゲーム開始直後から選択可能に変更</li></ul>
+<br>
+
+<h4><b>GOG版では、1998年に発売された本作オリジナルの要素を完全再現。『バイオハザード 2』が当時どのようにゲーマーに紹介されていたか、そのテキストを掲載（注：当時の英語版準拠のテキストとなります）：</b></h4><br><br>
+<b>特徴：</b><br>
+<br>
+<ul>
+<li>はじめての任務に向かう途中で大事件に巻き込まれた新人警官の「レオン・ケネディ」と、音信不通となった兄を捜す「クレア・レッドフィールド」の物語が個別に展開</i>
+<li>最新の3Dアクセラレーテッドグラフィックスが、リアルな恐怖体験を呼び起こす</li>
+<li>3Dアクセラレーターの設定を切り替えることで、プレイ環境に応じてパフォーマンスを最大化</li>
+<li>オリジナルの米国版『Resident Evil 2』と日本版『バイオハザード 2』の両方を実装した完全版
+日本語版、米国版がそれぞれORIGINAL、ARRANGEとしてモード選択可能に！</li>
+<li>エクストリームバトルモード：迫りくる大量のゾンビを相手に、熾烈なチャレンジをクリアせよ。アイテムや敵の配置は毎回ランダムに変化</li>
+<li>『バイオハザード 2』のギャラリーモードを搭載</li>
+<li>ゲーム開始直後から隠しシナリオをプレイ可能（先に一定の条件を満たしてゲームをクリアする必要なし）</li></ul>
+<br>
+<hr> <span>    
+<img src="https://items.gog.com/RE/DJCTQ_16.png">  
+<img src="https://items.gog.com/RE/IFCO_18.png">  
+<img src="https://items.gog.com/RE/ACB_MA15+.png">
+<img src="https://items.gog.com/RE/FPB_18.png">
+<img src="https://items.gog.com/RE/GCAM_18.png">
+<img src="https://items.gog.com/RE/RARS_PCBP_18.png">
+<img src="https://items.gog.com/RE/CERO_17.png"><img src="https://items.gog.com/RE/violence_49.png">
+<img src="https://items.gog.com/RE/CSRR_18.png">
+</span>
+</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

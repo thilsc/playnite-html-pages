@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Anodyne</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('6bcd0c5e-2b46-469a-944e-0857f7bb5f03/af0b25b0-ec81-4d07-9b5d-5fbd168bdaa2.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="6bcd0c5e-2b46-469a-944e-0857f7bb5f03/ee7e7858-9610-4560-9bdf-2dfb9793c6a1.png"/> Anodyne</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="6bcd0c5e-2b46-469a-944e-0857f7bb5f03/9f2ad18d-af23-4afb-b9bd-b7b2bdeaffb0.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-31/03/2025">31/03/2025</a> 23:16:05</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-31/03/2025">31/03/2025</a> 23:16:28</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-04/02/2017">04/02/2017</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Platform">Platform</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Analgesic Productions">Analgesic Productions</a><br/><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Marina Kittaka">Marina Kittaka</a><br/><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Melos Han-Tani">Melos Han-Tani</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Analgesic Productions">Analgesic Productions</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Nnooo Pty Ltd.">Nnooo Pty Ltd.</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="http://www.anodynegame.com" target="_blank">Official</a><br/><a href="https://store.steampowered.com/app/234900" target="_blank">Steam</a><br/><a href="https://itunes.apple.com/app/anodyne-mobile/id655470654?mt=8" target="_blank">iPhone</a><br/><a href="https://play.google.com/store/apps/details?id=air.Anodyne.mobile" target="_blank">Android</a><br/><a href="https://sean-han-tani.itch.io/anodyne" target="_blank">Itch</a><br/><a href="https://www.gog.com/game/anodyne" target="_blank">GOG</a><br/><a href="https://en.wikipedia.org/wiki/Anodyne_(video_game)" target="_blank">Wikipedia</a><br/><a href="https://discord.gg/invite/analgesic" target="_blank">Discord</a><br/><a href="https://www.twitch.tv/directory/game/Anodyne" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_tag_ascendente_name_ascendente.html#quicklink-[GGDeals] Synced">[GGDeals] Synced</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<p><strong>2023/10 Update: Anodyne has been Remastered!</strong> &nbsp;Details:&nbsp;<a href="https://steamcommunity.com/app/234900/discussions/0/5943120984243937208/" rel="nofollow noopener" referrerpolicy="origin">https://steamcommunity.com/app/234900/discussions/0/5943120984243937208/</a><strong></strong></p>
+<ul><li><strong>The 2D+3D sequel, <a href="https://han-tani.itch.io/anodyne-2">Anodyne 2</a>, is also available (and on Switch+Xbox+PS)<br></strong></li><li>Follow updates on our next game, <a href="https://han-tani.itch.io/analgesic-game-5-devlog">Angeline Era</a></li><li>If you like this, please follow me on <a href="https://twitter.com/han_tani" rel="nofollow noopener" referrerpolicy="origin">Twitter</a> or subscribe to our <a href="https://analgesic.productions/" rel="nofollow noopener" referrerpolicy="origin">newsletter</a> or <a href="https://www.youtube.com/c/ANALGESICPRODUCTIONS" rel="nofollow noopener" referrerpolicy="origin">Youtube<br></a></li><li>The music's on <a href="https://open.spotify.com/album/6toT1spvbK1aAewmmis9q9" rel="nofollow noopener" referrerpolicy="origin">Spotify</a> and all other streaming services! (Bandcamp too)</li><li>Our other games are a 2D story platformer, <a href="https://han-tani.itch.io/even-the-ocean">Even the Ocean,</a>and a 3D, cave-exploration platformer, <a href="https://han-tani.itch.io/sephonie">Sephonie.</a><a href="https://han-tani.itch.io/sephonie"></a></li><strong></strong></ul>
+<p><strong>(Content warnings at bottom)</strong><br></p>
+<p><em>Explore the wondrous dream world of the human Young.
+</em><em></em><br></p>
+<p><em>Anodyne is a unique Zelda-like game, influenced by games such as Yume Nikki and Link's Awakening. In Anodyne, you'll visit areas urban, natural, and bizarre, fighting your way through dungeons and areas in Young's subconscious.</em></p>
+<ul><li>Join our <a href="https://www.anodynegame.com" rel="nofollow noopener" referrerpolicy="origin">mailing list</a> for future game updates! </li><li>Join our <a href="http://discord.gg/analgesic" rel="nofollow noopener" referrerpolicy="origin">Discord community</a>!</li><li>Buy the sequel, Anodyne 2: Return to Dust on <a href="https://store.steampowered.com/app/877810/Anodyne_2_Return_to_Dust/" rel="nofollow noopener" referrerpolicy="origin">Steam</a> !&nbsp; or get it on <a href="https://han-tani.itch.io/anodyne-2">itch</a>.</li><li>Follow the creators on Twitter, <a href="https://twitter.com/han_tani" rel="nofollow noopener" referrerpolicy="origin">Melos</a> and <a href="https://twitter.com/even_kei" rel="nofollow noopener" referrerpolicy="origin">Marina</a>!</li></ul>
+<p>Originally released in 2013 by Marina Kittaka and Melos Han-Tani.&nbsp; Buy the OST at <a href="https://htch.bandcamp.com/album/anodyne" rel="nofollow noopener" referrerpolicy="origin">Melos's bandcamp.</a></p>
+<p>-Anodyne features Simplified Chinese, Japanese, Korean, Brazilian-Portugese, Spanish, and Italian language options<em>. <br></em></p>
+<p><strong>Reception</strong></p>
+<p><em>"Scenic water stretches and skyward spangles decorate idyllic countryside villages and moody, rain-drizzled night scenes. This is another one of those games I've flicked through the screenshots as if it were a global travel book outlining places you should visit before you die." - Chris Priestman, Indie Statik</em></p>
+<p><em>"The game's sound design is the strongest facilitator of Anodyne's sense of dread and unease; the ambience and music give off an air of suspicion and danger, with ugly chords and disquieting, unnatural-sounding synthetic pings. It all adds up to a game where you're not sure who to trust, and you can't be sure of what's real." - Sam Prell, Penny Arcade Report</em><em><br></em><strong><br></strong></p>
+<p>Content Warnings (Light spoilers)</p>
+<ul><li>Low-res pixel art (like in the style of the screenshots of): Suicide by hanging, mild horror, murder by blunt objects, dead bodies, stabbing, blood stains, mentions of sex, unexpected killing of an NPC. Rare strong language. Note this isn't representative of the majority of the game, but it is unavoidable.</li></ul>
+<p>Content Warnings (Spoilers)</p>
+<ul><li>Early on, if you try to talk to a fisherman, when trying to talk, you will unexpectedly hit them into the ocean and it turns the water red. They're implied to die.</li><li>In the late-game black/white suburb area: suicide by hanging, murder by blunt objects, stabbing, blood stains, dead bodies, mild horror</li><li>In the late-game 8-bit pixel art maze: blood stains, dead bodies</li><li>In the late-game circus area: mentions of suicide, suicide by falling into a pit, dead bodies, blood stains</li><li>In the very-late-game golden garden area: mentions of sex</li><li>Throughout: rare strong language</li></ul>
+<p></p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Crest - an indirect god game</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('59c94c11-89ef-4b43-bcb4-7b991ef735a3/2dae78f7-2dd7-4ea1-9f56-18908d0db679.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="59c94c11-89ef-4b43-bcb4-7b991ef735a3/693f8e5a-3fb2-45a4-9d37-0283c8e8933d.png"/> Crest - an indirect god game</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="59c94c11-89ef-4b43-bcb4-7b991ef735a3/07e46549-8b11-444a-be36-db89fd5f7b8f.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-02/04/2025">02/04/2025</a> 18:03:06</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-02/04/2025">02/04/2025</a> 18:04:12</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-21/07/2015">21/07/2015</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-60">60</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Simulator">Simulator</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Eat Create Sleep">Eat Create Sleep</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-Eat Create Sleep">Eat Create Sleep</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/341710" target="_blank">Steam</a><br/><a href="http://eatcreatesleep.net" target="_blank">Official</a><br/><a href="https://eatcreatesleep.itch.io/crest" target="_blank">Itch</a><br/><a href="https://twitter.com/EatCreateSleep" target="_blank">Twitter</a><br/><a href="https://www.twitch.tv/directory/game/Crest" target="_blank">Twitch</a><br/><a href="https://youtube.com/eatcreatesleep" target="_blank">YouTube</a><br/><a href="https://facebook.com/eatcreatesleep" target="_blank">Facebook</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_tag_ascendente_name_ascendente.html#quicklink-[GGDeals] Synced">[GGDeals] Synced</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<h2>Lead Your Followers Into the Future!</h2>
+<p>Your word is gospel in this god sim set in Sub-Saharan Africa. Influence and try to control your followers using commandments but beware, free will leaves these open to interpretation. Will you create a flourishing civilization or lead them to death and destruction?</p>
+<div><button itchio="" aria-label="Click to activate YouTube embed" type="button" class="embed_preload youtube_preload" data-embed_code="<iframe style=&quot;width: 500px; height: 281px&quot; src=&quot;//www.youtube.com/embed/HQVrnizcdQU&quot; allowfullscreen=&quot;&quot; frameborder=&quot;0&quot;></iframe>" style="width: 250px; height: 140px; background: url(https://i.ytimg.com/vi/HQVrnizcdQU/hqdefault.jpg) 50% 50% no-repeat; background-size: cover"></button></div>
+<p>About This Game<br></p>
+<p>Welcome to Crest, a unique take on the traditional god sim, where your word is gospel. Control and guide your followers by issuing commandments written in an evolving pictographic language.<br></p>
+<p>How these commandments are interpreted and remembered is not set in stone. What you communicate and what experiences your followers have with the environment is the basis for their religion. Over time, commandments can develop different associations and completely change their meaning. After all, your followers still have free will and will sometimes do what they think is best for them, regardless of what you had in mind.</p>
+<p>The consequences of your actions may not always be clear and you will need to be aware of the ever-changing environment, your people's beliefs and their feelings about you. </p>
+<p>Will they love, respect or fear you?</p>
+<h2>Key Features</h2>
+<ul><li><strong>Create your own religion,</strong> nurture your followers and observe how they evolve, or die, as a result of your decisions - including the unintended consequences of your commands! </li></ul>
+<ul><li><strong>Sandbox-style gameplay: </strong>Oversee a world where weather, vegetation, mineral deposits, drought and animal behavior will create surprises</li></ul>
+<ul><li><strong>Weave your own stories</strong> through trial and error. The history of your people will be chronicled and presented to you at the end of your vigil using the in-game storybuilder.</li></ul>
+<ul><li><strong>Progress by unlocking new words</strong>, increasing the complexity of your commandments</li></ul>
+<ul><li><strong>Customize the difficulty of your games</strong> with various amounts of resources, animals, islands and overall island quality</li></ul>
+<ul><li><strong>Built-in Twitch support:</strong> When you live-stream the game on Twitch, your viewers can join your cities and vote on commandments to help or disrupt your godly plans</li></ul>
+<h2>Setting</h2>
+<p>Crest is an Afrofuturist game that reimagines how humanity arose in the cradle of humankind on the African continent. It's a historical themed game that tries to emulate an advanced iron age civilization that could have existed a few thousand years ago. The setting for the game world, its flora and fauna is based on African biomes, with rainfall determining the tug-of-war between desert, savanna and jungle.<br></p>
+<p><br></p>
+<p><span></span></p>
+<h2>Progression and Losing</h2>
+<p>Every new world you start is unique and will write its own stories. If all your followers die, that world is gone forever. However, you will still be able to view the legacy of your previous worlds. As long as your people live you can continue playing and further shape your own history by creating more and more complex commandments with newly unlocked words.</p>
+<p><img src="https://lh4.googleusercontent.com/De4FjwAi4990fwuQdPFoccBR8L-dVGzCTzVXREi8LUCFzpOzaNfFllUlM32oaYZEk_7ZnoltT_NhEsjWSWRDTpFMsGXqbHNYm64HwghzB9q1rEIzZ9AOt3QMlT1iKx3nsCf0npEr" width="600" height="178" loading="lazy"><br></p>
+<p>
+	<span></span></p>
+<hr>
+<p>This game is made by Eat Create Sleep, reach us here:<br></p>
+<p><span></span></p>
+<p><a href="http://eatcreatesleep.net/" referrerpolicy="origin" rel="nofollow noopener">eatcreatesleep.net</a><br><a href="https://twitter.com/EatCreateSleep" referrerpolicy="origin" rel="nofollow noopener">@eatcreatesleep</a><br><a href="http://twitter.com/CrestGame" target="_blank" referrerpolicy="origin" rel="nofollow noopener">@CrestGame</a></p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

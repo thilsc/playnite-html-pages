@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Moonlighter</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('9b7e0299-85a4-45d3-a99d-c1b706081ff1/a8f54c39-cfc1-4371-8741-80ca67dcd2c6.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src=""/> Moonlighter</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="9b7e0299-85a4-45d3-a99d-c1b706081ff1/f787749c-7a35-4cc2-8560-b0cfd0c7aebb.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-11/02/2025">11/02/2025</a> 13:17:42</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-11/02/2025">11/02/2025</a> 13:31:46</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-29/05/2018">29/05/2018</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-71">71</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-82">82</a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Hack and slash/Beat 'em up">Hack and slash/Beat 'em up</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Simulator">Simulator</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-Digital Sun Games">Digital Sun Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-11 bit studios">11 bit studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://twitter.com/DigitalSunGames" target="_blank">Twitter</a><br/><a href="http://www.moonlighterthegame.com" target="_blank">Official</a><br/><a href="https://store.steampowered.com/app/606150" target="_blank">Steam</a><br/><a href="https://moonlighter.gamepedia.com/Moonlighter_Wiki" target="_blank">Wikia</a><br/><a href="https://en.wikipedia.org/wiki/Moonlighter" target="_blank">Wikipedia</a><br/><a href="https://www.facebook.com/digitalsungames" target="_blank">Facebook</a><br/><a href="https://www.epicgames.com/store/en-US/product/moonlighter/home" target="_blank">Epic</a><br/><a href="https://www.gog.com/game/moonlighter" target="_blank">GOG</a><br/><a href="https://www.reddit.com/r/Moonlighter" target="_blank">Reddit</a><br/><a href="https://www.youtube.com/11bitstudios/" target="_blank">YouTube</a><br/><a href="https://www.twitch.tv/directory/game/Moonlighter" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/specialPt-Br.jpg?t=1737373508" /></p><p class="bb_paragraph">Desde o lançamento, adicionamos muito conteúdo novo ao Moonlighter por meio de atualizações. De mudanças pequenas, como a possibilidade de mudar a função das teclas, correções de erros e ajustes de balanceamento, a grandes inovações que prometemos em nosso planejamento. A versão atual de Moonlighter oferece a experiência original com uma fama de melhorias importantes para novos e antigos jogadores.</p><p class="bb_paragraph"></p><p class="bb_paragraph">Encare minichefes usando armas, armaduras, anéis e amuletos inéditos. Navegue por 100 padrões novos para as salas com a ajuda de 9 companheiros corajosos e descubra mais sobre a história. Termine a aventura principal e desbloqueie o modo Novo Jogo+, que contém desafios e opções adicionais.</p><p class="bb_paragraph"></p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/Header.png?t=1737373508" /></p><p class="bb_paragraph">Durante uma escavação arqueológica – um conjunto de Portais foi descoberto. Rapidamente as pessoas se deram conta de que essas antigas passagens levavam a diferentes reinos e dimensões. Rynoka, uma pequena vila mercante, foi erguida próxima ao sítio de escavações – proporcionando aventuras corajosas e imprudentes com tesouros além da imaginação.</p><p class="bb_paragraph"></p><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/Moonlighter_steamdeck_616x226_.png?t=1737373508" /></p><p class="bb_paragraph">Moonlighter é um RPG de Ação com elementos de rogue-lite, que revela o dia a dia de Will, um dono de loja aventureiro que sonha em se tornar um herói.</p><p class="bb_paragraph"></p><h2 class="bb_tag"><strong>CUIDE DA LOJA</strong></h2><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/1_Shopkeeping.gif?t=1737373508" />Enquanto conduz seus negócios na vila de Rynoka, você pode colocar <strong>itens à venda, ajustar seus preços com precisão, administrar reservas de ouro, recrutar assistentes e fazer melhorias na loja</strong>.</p><p class="bb_paragraph">Mas tome cuidado – alguns indivíduos suspeitos podem tentar roubar seus preciosos bens!</p><p class="bb_paragraph"></p><h2 class="bb_tag"><strong>LUTE COM ESTILO</strong></h2><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/2_Fight.gif?t=1737373508" />Derrotando <strong>diversos inimigos e chefes</strong>, mergulhe nas desafiadoras e <strong>intensas mecânicas de combate</strong>. O vigor dos combates depende da interação entre armas, timing, posicionamento, inimigos e ambiente. <strong>Sinta-se à vontade para desenvolver seu próprio estilo de batalha</strong>.</p><p class="bb_paragraph"></p><h2 class="bb_tag"><strong>RESTAURE A VILA</strong></h2><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/3_Villagers.gif?t=1737373508" />Conheça outros aldeões enquanto restaura a prosperidade desse pequeno vilarejo comercial. Ajude a estabelecer novos negócios e veja-os crescer na idílica vizinhança de Rynoka.</p><p class="bb_paragraph"></p><h2 class="bb_tag"><strong>CONSTRUA E ENCANTE</strong></h2><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/4_Craft.gif?t=1737373508" />O sistema de construir e encantar é essencial para o seu progresso. Interagir com os aldeões é o caminho para <strong>construir novas armaduras, armas e encantar seus equipamentos</strong>. O que criauma grande flexibilidade e dá um gosto a mais nas formas de usar seu equipamento.</p><p class="bb_paragraph"></p><h2 class="bb_tag"><strong>COLETE A PILHAGEM</strong></h2><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/5_Loot.gif?t=1737373508" />Visite estranhos mundos através dos portais e colete <strong>itens valiosos de civilizações exóticas</strong>: recursos, armas, armaduras e artefatos peculiares. Entretanto, guardar tudo não será possível - use o sistema único de inventario com sabedoria para levar os itens mais valiosos com você.</p><p class="bb_paragraph"></p><h2 class="bb_tag"><strong>ABRA OS PORTAIS</strong></h2><p class="bb_paragraph"><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/extras/6_Companions.gif?t=1737373508" />Os portais levam a mundos diferentes. Cada aventura é única e força você a tomar decisões inteligentes. Você nunca sabe o que irá encontrar em seguida – é por isso que <strong>você deve estar preparado para tudo</strong>.</p><p class="bb_paragraph"></p><p class="bb_paragraph"></p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

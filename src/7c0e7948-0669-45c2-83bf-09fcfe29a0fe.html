@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nina Aquila: Legal Eagle, Chapter II: &quot;Broken Wings&quot;</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('7c0e7948-0669-45c2-83bf-09fcfe29a0fe/e7a5dac1-689f-46f8-805c-09eb7019cfa2.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="7c0e7948-0669-45c2-83bf-09fcfe29a0fe/54fa38ec-b632-4ba8-9535-dc892e57e347.png"/> Nina Aquila: Legal Eagle, Chapter II: &quot;Broken Wings&quot;</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="7c0e7948-0669-45c2-83bf-09fcfe29a0fe/9cafafc1-e920-43bf-a118-e44c4224ec55.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-02/04/2025">02/04/2025</a> 18:03:05</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-02/04/2025">02/04/2025</a> 18:03:51</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-19/12/2018">19/12/2018</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Visual Novel">Visual Novel</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://ethan-fox.itch.io/nina-aquila-legal-eagle-ii-broken-wings" target="_blank">Official</a><br/><a href="https://tanuki-sama-studios.itch.io/nina-aquila-legal-eagle-ii-broken-wings" target="_blank">Itch</a><br/><a href="https://twitter.com/By_Ethan_Fox" target="_blank">Twitter</a><br/><a href="https://www.twitch.tv/directory/game/Nina%20Aquila%3A%20Legal%20Eagle%2C%20Chapter%20II%3A%20%22Broken%20Wings%22" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_tag_ascendente_name_ascendente.html#quicklink-[GGDeals] Ignored">[GGDeals] Ignored</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<h1 class="text-center">Want to know more?<br>Check out&nbsp;<em>Nina Aquila: Legal Eagle, Season One </em>by clicking <a href="https://tanuki-sama-studios.itch.io/nina-aquila-legal-eagle-season-one">HERE</a>!</h1>
+<hr>
+<h4 class="text-center">Nina Aquila returns in Legal Eagle II: "Broken Wings"!</h4>
+<hr>
+<p><em><em></em>Nina&nbsp;Aquila: Legal Eagle&nbsp;is a series&nbsp;of anime-themed VN/graphic adventure games, in which you step into the shoes&nbsp;of a rookie&nbsp;defense attorney.&nbsp;Fledge City is in crisis, and it's up to Nina Aquila and her friends to make sure justice prevails!</em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<p><em></em></p>
+<ul><li>An anime-themed epic told over <strong>4 hours</strong> of gameplay!</li><li>Aimed at adults, but entirely SFW</li><li>A hybrid visual novel/graphic adventure game</li><li>An exciting mystery plot that satirises "collect and battle" anime, such as&nbsp;<em>Yugioh</em> and&nbsp;<em>Gundam Build Fighters</em></li></ul>
+<hr>
+<p class="text-center"><a href="https://discord.gg/YyH5Ksa" referrerpolicy="origin" rel="nofollow noopener"><img src="https://img.itch.zone/aW1nLzUxNzY5MzAucG5n/original/WDB7aV.png" loading="lazy"></a>&nbsp;&nbsp;<a href="https://www.teepublic.com/en-gb/user/nale" referrerpolicy="origin" rel="nofollow noopener"><img src="https://img.itch.zone/aW1nLzUxNzY5MzIucG5n/original/x56i9p.png" loading="lazy"></a>&nbsp;&nbsp;<a href="https://twitter.com/NinaAquilaGame" referrerpolicy="origin" rel="nofollow noopener"><img src="https://img.itch.zone/aW1nLzUxNzY5MzMucG5n/original/CGJjgQ.png" loading="lazy"></a></p>
+<hr>
+<p class="text-center"><a href="https://ethan-fox.itch.io/nale"><img src="https://img.itch.zone/aW1nLzQ1NTc4MzMucG5n/original/c9oNpI.png" alt="https://ethan-fox.itch.io/nale" title="https://ethan-fox.itch.io/nale" loading="lazy"></a><br></p>
+<p class="text-center"><strong><a href="https://ethan-fox.itch.io/nale">◁◁&nbsp; PREV CHAPTER</a>&nbsp; &nbsp;|&nbsp; &nbsp;<a href="https://ethan-fox.itch.io/nale">FIRST CHAPTER</a>&nbsp; &nbsp;|&nbsp; &nbsp;<a href="https://ethan-fox.itch.io/nina-aquila-legal-eagle-chapter-iii-legal-stage">NEXT CHAPTER&nbsp;▷▷</a></strong></p>
+<hr>
+<h3 class="text-center">Case II: "Broken Wings"</h3>
+<blockquote>Get ready to duel!<br><br>Several weeks have passed since the events of <a href="https://ethan-fox.itch.io/nale">Nina Aquila:&nbsp;Legal Eagle</a>, and Nina's life is in turmoil after a costly defeat in court. Her confidence shattered, Nina holes up in her office until a visitor comes to the door - one who believes that only she can help him.<br><br>A murder has been committed&nbsp;at the High Flyers Casino. The victim? A celebrity player of a trading card game, "Dragon Fantasy Arena", on the eve of the national tournament!<br><br>Who would commit murder over a children's card game?&nbsp;And why?<br><br>Surrounded by hot-blooded heroes and dastardly cosplaying villains, Nina will need &nbsp;all her cunning if she's to make the best of a bad draw... Or her client's going to be sent to the graveyard!</blockquote>
+<h4 class="text-center">New features for this chapter</h4>
+<ul><li>Investigate crime scenes and explore key locations</li><li>Explore Fledge City using a pseudo-3D Mode-7 overworld</li><li>Play "Dragon Fantasy Arena",&nbsp; a card-game-themed battle system unique to the world of NALE</li></ul>
+<hr>
+<h3 class="text-center">Content/Trigger Warnings</h3>
+<p>NALE Chapter 2 features a story which revolves around a key murder, though there is no gore. There are also themes of bereavement and recent loss.<br></p>
+<h3 class="text-center">Accessibility Info</h3>
+<p>NALE has a number of accessibility considerations, which&nbsp;may make the game more comfortable for some&nbsp;players. These options include reducing flashes and bright, intense onscreen effects. A full rundown of NALE's accessibility options can be found&nbsp;<a href="https://tanuki-sama-studios.itch.io/nale/devlog/204538/nale-accessibility-settings-documentation">HERE</a>.</p>
+<p><br></p>
+<h3 class="text-center">State of Development</h3>
+<p>NALE is created on a chapter-by-chapter basis.</p>
+<p>The <a href="https://ethan-fox.itch.io/nale">initial chapter</a> is free, follow-up chapters are&nbsp;available for a small fee.</p>
+<p>Funds raised will initially go towards the unique assets required to create the future cases, with a long-term goal of replacing all the visual aspects of the game with unique character and environment assets.<br></p>
+<p>Updates &amp; news are posted&nbsp;<a href="https://ethan-fox.itch.io/nina-aquila-legal-eagle-ii-broken-wings/devlog">HERE</a>.</p>
+<p class="text-center"><a href="https://discord.gg/YyH5Ksa" referrerpolicy="origin" rel="nofollow noopener"><img src="https://img.itch.zone/aW1nLzIxNDEzODUucG5n/original/1WwVsw.png" width="256" loading="lazy"></a><br></p>
+<h3 class="text-center">Credits &amp; Special Thanks</h3>
+<p class="text-center"><a href="https://tanukisama.com/" referrerpolicy="origin" rel="nofollow noopener"><img src="https://img.itch.zone/aW1nLzQ2OTE3ODcucG5n/original/lgv9w0.png" loading="lazy"></a><br></p>
+<p>This game was made by Tanuki-sama&nbsp;Studios, who can be found on&nbsp;<a href="https://twitter.com/NinaAquilaGame" referrerpolicy="origin" rel="nofollow noopener">twitter</a> or their&nbsp;<a href="https://www.tanukisama.com" referrerpolicy="origin" rel="nofollow noopener">website</a>.</p>
+<p>Thanks go to the RPG Maker official forums &amp; subreddit, all of my followers on Twitter &amp; Tumblr, and members of the NALE discord.</p>
+<p class="text-center"><strong>The game also features an extensive credits list that covers plugin, asset and voice attribution; please check these out as NALE would only be possible with their help!</strong></p>
+<p><em></em></p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

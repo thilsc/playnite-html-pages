@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tower Hunter: Erza&#39;s Trial</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('a681f5a0-15a1-4246-a210-b869e0a40034/c1d81da5-6054-4981-95ea-f8b3e6ca2fd4.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="a681f5a0-15a1-4246-a210-b869e0a40034/289e68e4-df69-4b8c-80f2-8c979c565cdc.png"/> Tower Hunter: Erza&#39;s Trial</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="a681f5a0-15a1-4246-a210-b869e0a40034/642c5320-9981-45fe-ad57-7dc199f9e7ee.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-11/02/2025">11/02/2025</a> 13:17:39</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-11/02/2025">11/02/2025</a> 13:29:13</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-12/10/2019">12/10/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-50">50</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Platform">Platform</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascendente_name_ascendente.html#quicklink-IceSitruuna">IceSitruuna</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascendente_name_ascendente.html#quicklink-IceSitruuna">IceSitruuna</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/844850" target="_blank">Steam</a><br/><a href="https://twitter.com/IceSitruuna" target="_blank">Twitter</a><br/><a href="https://www.gog.com/game/tower_hunter_erzas_trial" target="_blank">GOG</a><br/><a href="https://twitter.com/TowerHunter_Erz" target="_blank">Official</a><br/><a href="http://itunes.apple.com/us/app/id1601356002#?platform=iphone" target="_blank">iPhone</a><br/><a href="http://itunes.apple.com/us/app/id1601356002#?platform=ipad" target="_blank">iPad</a><br/><a href="https://www.twitch.tv/directory/game/Tower%20Hunter:%20Erza's%20Trial" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<h4>Introduction:</h4>
+<br>
+<img src="https://items.gog.com/tower_hunter_erza's_trial/capsule_main_workshop.png" >
+<br>
+<br>
+  With features of roguelite, players of <b>Tower Hunter: Erza’s Trial</b> fight their way up in the world of a giant tower with random modules. Different terrains are found in the towers, and there is exploration to do and challenges to overcome. Due to a contract between our heroine Erza and a demon, Erza is beamed back to the original start every time she dies. As time loops, Erza, becomes a strong fighter who can make her way to her target.
+<br>
+<br>
+<center><video muted preload="auto" loop autoplay="autoplay" style="display:block;width:100%">
+  <source src="https://items.gog.com/tower_hunter_erza's_trial/mp4/fantan.mp4" type="video/mp4"></video></center>
+<br>
+<h4>Features:</h4><ul class="bb_ul"><li>2.5d  toon render side-scroller game that exhibits fluent motion display.</li></ul><ul class="bb_ul"><li>smooth control: a dodge may cancel punish, and strength and direction can be fine-tuned for jumps.</li></ul><ul class="bb_ul"><li>Soul-like actions: supplies are limited; footsie and dodge are key factors and every move and weapon has its own magic.</li></ul></h4><ul class="bb_ul"><li>Each weapon has its ownfeatures a combo with which: you can combine light and heavy blows and switch from attack andto dodge.</li></ul><ul class="bb_ul"><li>The classic order system from Castlevania is incorporated: special weapon skills and magic are triggered by simple commands.</li></ul><ul class="bb_ul"><li>Take advantage of the special rune core system: in every adventure, the player can choose to foster a certain passive skill.</li></ul><ul class="bb_ul"><li>licence system: acquire licences based on your clearance speed and the achievement of different conditions. These licences can be used for other purposes beyond display.</li></ul><ul class="bb_ul"><li>Explore hidden elements: hidden passages that can be destroyed and sealed doors that must be opened using a corresponding colour key and that are full of dangers.</li></ul>
+<br>
+<img src="https://items.gog.com/tower_hunter_erza's_trial/BOSS3.jpg" ><h4><h4>Gameplay:</h4></h4>In the world of Tower Hunter, countless warriors have already gone before you to challenge the unsolved secrets of the tower, but they failed.<h4>A mischievous god is lord of the tower. Cards appear after bosses are defeated.</h4>
+The empire grants different levels of licences to the warriors exploring the tower, according to the rarity of the cards they have collected. These licences bring with them status and power. Nobles have gone to the tower to compete for status and glory, but none have been as fortunate as our heroine Erza.
+<br>
+In her childhood, Erza became bonded with a demon, who grants her another chance at life each time she dies. Due to this special ability, Erza can explore frontiers that no one has ever seen.
+<br>
+<br>
+<center><video muted preload="auto" loop autoplay="autoplay" style="auto;display:block; float:left;width:46%">
+  <source src="https://items.gog.com/tower_hunter_erza's_trial/mp4/21.gif.mp4" type="video/mp4"></video><video muted preload="auto" loop autoplay="autoplay" style="auto;display:block;width:46%">
+  <source src="https://items.gog.com/tower_hunter_erza's_trial/mp4/31.gif.mp4" type="video/mp4"></video></center>
+<br>
+One common feature of roguelike games is that there is no checkpoint where progress can be saved, and players must lose everything if their character dies. This basic design is followed here, but players can still accumulate a certain proportion of resources during the course of each adventure, and these can be used to acquire more skills and send characters to new stages, where they develop and become stronger. The more familiar the player becomes with gameplay, the more practised the response and battle skills are and the stronger and better equipped the heroine is, the further the player can go in the tower.
+<br>
+<br>
+This game is the prologue to Tower Hunter, which tells the story of how Erza the Sword Maiden became Empire’s youngest Major. What is in store for her? Stay tuned!
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

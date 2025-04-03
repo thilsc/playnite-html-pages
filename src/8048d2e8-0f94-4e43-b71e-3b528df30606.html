@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Shrug Island - The Meeting</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('8048d2e8-0f94-4e43-b71e-3b528df30606/05ca02d2-ff64-41a0-9c41-42fae892119b.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="8048d2e8-0f94-4e43-b71e-3b528df30606/d12e27ff-91a6-4371-b113-e3b46c5a15b4.png"/> Shrug Island - The Meeting</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="8048d2e8-0f94-4e43-b71e-3b528df30606/ad1326ee-8e93-4675-8d44-b3ea3a293793.gif"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descendente_name_ascendente.html#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descendente_name_ascendente.html#quicklink-31/03/2025">31/03/2025</a> 23:16:05</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descendente_name_ascendente.html#quicklink-31/03/2025">31/03/2025</a> 23:16:14</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascendente_name_ascendente.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descendente_name_ascendente.html#quicklink-01/05/2018">01/05/2018</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descendente_name_ascendente.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Music">Music</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascendente_name_ascendente.html#quicklink-Puzzle">Puzzle</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascendente_name_ascendente.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/420170" target="_blank">Steam</a><br/><a href="http://www.shrugisland.com" target="_blank">Official</a><br/><a href="https://tinyredcamel.itch.io/shrug-island-the-meeting" target="_blank">Itch</a><br/><a href="https://twitter.com/tinyredcamel" target="_blank">Twitter</a><br/><a href="https://www.twitch.tv/directory/game/Shrug%20Island%20-%20The%20Meeting" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_tag_ascendente_name_ascendente.html#quicklink-[GGDeals] Synced">[GGDeals] Synced</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<p class="text-center"><strong>Everything is alive, but how do you talk to it?</strong></p>
+<p class="text-justify"><strong>Shrug Island - The Meeting</strong> is a warmly wistful adventure, an open door into a playful celebration of music, mystery and nature’s dances.&nbsp; In a personal fusion of genres crafted by a small team of music and nature lovers, it's a game about hope, reconnecting friendship, and hidden pasts, featuring beautiful hand-drawn art and soundscapes.&nbsp;</p>
+<p class="text-justify">The Watcher, keeper of the Island’s balance, is losing their powers and calls for help. Delve into the&nbsp;adventure with two separated Shrug friends, Li and Shri, as they heed the call, exploring their shape-shifting musical landscape they’ve just returned to. Using their power to transform the land, by playing music or revealing a hidden layer of the world where forgotten things lie,&nbsp;combine their skills on a journey towards each other.</p>
+<p>&nbsp;&nbsp;<a href="https://shrugworlds.tumblr.com/post/173309382475/shri-li-metaphor-to-mechanic" target="_blank" rel="nofollow noopener" referrerpolicy="origin"><img src="https://img.itch.zone/aW1nLzEzMjUyODcucG5n/original/D3wkLP.png" loading="lazy"></a></p>
+<p><strong>Key Character features:</strong></p>
+<p>- Psychic archeology</p>
+<p>- Musical metamorphosis</p>
+<p><strong>Come away</strong> and spend an hour or two with the Shrugs on their lively home. Unravel riddles of groaning cliffs and puzzles of the past, where crispy crabs, sweeps of seaweed, flights of fish and more mysteries of Shrug time await your voice to speak.</p>
+<p class="text-justify"><strong>Shrug Island - The Meeting</strong>&nbsp;can be played by a goal oriented adventure gamer in around an hour. Wanderers can take a more leisurely path and explore the changing season around the Island.<br></p>
+<p class="text-justify">Shrug Island is an allegory on the many levels of&nbsp;identity, belonging, care and renewal.</p>
+<p class="text-center"><img src="https://img.itch.zone/aW1nLzEzMjUyOTcucG5n/original/2kNCj9.png" loading="lazy"><br></p>
+<blockquote>"The lovely interplay between island, music, and the two playable shrugs was a ray of sunlight that I quite enjoyed basking in while it lasted.." -&nbsp;<a href="https://adventuregamers.com/articles/view/35561" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Merlina McGovern, Adventure Gamers</a><br><br><br>"<em>Shrug Island - The Meeting</em>&nbsp;draws the player into its colorful world, then lets them free to see what music can do in this enchanted place. While it can be finished quickly, it's well worth your while to lose yourself in its sights and&nbsp;sounds<em>&nbsp;</em>." -&nbsp;<a href="http://indiegames.com/2018/05/shrug_island_-_the_meetings_st.html" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Joel Couture, indiegames.com</a></blockquote>
+<blockquote><br>"<em>Shrug Island</em> is a relaxing spiritual experience transmitting positive feelings: beauty, love, friendship, empathy, harmony with nature, childhood nostalgia." -&nbsp;<a href="https://vgartsite.wordpress.com/2018/06/13/shrug-island-the-meeting/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Video Games Art<br><br></a></blockquote>
+<div class="text-center"><button itchio="" aria-label="Click to activate YouTube embed" type="button" class="embed_preload youtube_preload" data-embed_code="<iframe style=&quot;width: 500px; height: 281px&quot; src=&quot;//www.youtube.com/embed/gB5xN7gPrzc&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;></iframe>" style="width: 250px; height: 140px; background: url(https://i.ytimg.com/vi/gB5xN7gPrzc/hqdefault.jpg) 50% 50% no-repeat; background-size: cover"></button></div>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p class="text-center">&nbsp; &nbsp; &nbsp;<a href="https://conf.nordicgame.com/nordic-game-awards/" target="_blank" rel="nofollow noopener" referrerpolicy="origin"><img src="https://img.itch.zone/aW1nLzIxMTIyNTUucG5n/original/Z40Pyo.png" style="width: 30%; height: 30%" alt="Nordic Game Awards Best Audio Nominee Shrug Island" title="Nordic Game Awards Best Audio Nominee Shrug Island" loading="lazy"></a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="https://spilprisen.dk/nominerede/" target="_blank" rel="nofollow noopener" referrerpolicy="origin"><img src="https://img.itch.zone/aW1nLzIxMTIyMjMucG5n/original/JMoaDk.png" style="width: 30%; height: 30%" alt="Spilprisen Best Debut Best Audio Nominee Shrug Island" title="Spilprisen Best Debut Best Audio Nominee Shrug Island" loading="lazy"></a><br></p>
+<p><img src="https://img.itch.zone/aW1nLzEyMDk5MjkucG5n/original/DNf2nR.png" loading="lazy"><br></p>
+<p><em><br></em></p>
+<p><em>Shrug Island - The Meeting is a first commercially released&nbsp; game based on <a href="http://vimeo.com/5543944" target="_blank" rel="nofollow noopener" referrerpolicy="origin">an awarded animation film</a> by <a href="https://alinac.itch.io/" target="_blank">Alina Constantin</a> .&nbsp;Followed by many migrations, strawbale building, prototypes, a Kickstarter campaign, cultural grants and changing tides, you can look into the long gestation process on <a href="http://www.shrugisland.com" target="_blank" rel="nofollow noopener" referrerpolicy="origin">www.shrugisland.com</a></em></p>
+<p><em>&nbsp;</em><br></p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
