@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Flux</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('197213f1-d413-4ea1-bac4-92d360069f33/dea1791e-023d-413e-aabb-4853ae043688.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img alt="icon" Height="48" class="lozad" data-src="197213f1-d413-4ea1-bac4-92d360069f33/faab90e5-7c2f-46f3-bf83-9d3a85f865a1.gif"/> Flux</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img alt="cover" Height="175" class="lozad" data-src="197213f1-d413-4ea1-bac4-92d360069f33/07937752-d7b7-4f5c-9e39-49a8c8bc91c5.gif"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="#quicklink-04/04/2025">04/04/2025</a> 0:19:57</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="#quicklink-04/04/2025">04/04/2025</a> 0:22:24</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="#quicklink-17/02/2017">17/02/2017</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="#quicklink-Music">Music</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://nujakujata.itch.io/flux" target="_blank">Itch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[GGDeals] Synced">[GGDeals] Synced</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<p>FLUX presents a variety of limited-difficulty experiences: Interactive fiction with a series of mini-games that challenge you to type, hack-n-slash, organize or fidget to earn credits and purchase numerous cosmetic items: hairstyles, helmets, outfits and upgrades! Designed to allow players to alternate between chill and twitch-based game modes, the game provides players with a number of activities to engage with that offer zero consequences. Flux and chill!</p>
+<p>Wanderer, a blue-haired ex-military swordsman, spends their nights joy riding/flying through the streets/skies of a sprawling cyberpunk cityscape. Through conversations with Wanderer's girlfriend and local NPCs you'll learn more about the world and reveal many answers to mysteries surrounding those that live there.</p>
+<p></p>
+<figure><img src="https://img.itch.zone/aW1nLzIwMjI4MDQucG5n/original/ejVhP7.png" width="160" loading="lazy"><img src="https://img.itch.zone/aW1nLzQ0MTYwNTkucG5n/original/iLxHBi.png" width="160" loading="lazy"><img src="https://img.itch.zone/aW1nLzIwMjI4MDUucG5n/original/MCWqU0.png" width="160" loading="lazy"><img src="https://img.itch.zone/aW1nLzI2OTAyNjYucG5n/original/X0HUs8.png" width="160" loading="lazy"><img src="https://img.itch.zone/aW1nLzI2OTAyNjgucG5n/original/TvUEqt.png" width="160" loading="lazy"><img src="https://img.itch.zone/aW1nLzQyMjk4MTIucG5n/original/iN01KJ.png" width="160" loading="lazy"><br></figure>
+<p>
+<img src="https://img.itch.zone/aW1nLzIwMjE3OTIucG5n/original/t66ubA.png" loading="lazy">
+</p>
+<ul><li><strong>Many&nbsp;Minigames&nbsp;in One:</strong> Fiction,&nbsp;Beat-em-up, Typing, Fidget, Rhythm, Reflective activities are available as "jobs" you can take each day, each with their own objectives and pace!</li><li><strong>Cosmetics + Cybernetics:</strong> Earn credits throughout your experience and spend them on new outfits, helmets, hairstyles and augments for your body.</li><li><strong>Customizable and Chill Tunes:</strong> Listen to the 80s Chillwave groove provided by Quantum Dylan or replace the provided .mp3 files in the install directory and create your own soundscape!</li><li><strong>Compelling World:</strong> Text your girlfriend, listen to the news, interact with your environment and converse with locals to learn more about the game’s characters and world.<span></span></li><li><strong>Built in&nbsp;Flash:</strong> Yeah, THAT Flash, which means the file size is small and loading times are nonexistent!</li></ul>
+<figure><img src="https://img.itch.zone/aW1nLzIwMjE4MDQucG5n/original/kl8dqe.png" style="color: inherit" loading="lazy"><span></span><span></span><br></figure>
+<p>Flux's game modes are treated as "jobs" each day. By participating in one, you shift the game forward in time. Each mode has a Flux value representing the game's music volume and speed rate that rise and fall depending on the mode's mechanics:</p>
+<ul><li><strong>Groove:</strong> A traditional rhythm activity tasking players with pressing the correct inputs at</li><li><strong>Freestyle:</strong> A fidget style game where you define your own rhythm, reflect and zone out to the beat.</li><li><strong>Challenge:</strong> A typing-oriented game where you are given random letters A-Z to press. This tests your awareness of each letter's position on the keyboard.</li><li><strong>Spelling:</strong> A typing-oriented mode where you are tasked with spelling out entire words to increase your Flux.</li><li><strong>Glyph:</strong> A visual challenge where you must rotate the objects on the right with the arrow keys to match the positions of the objects on the left.</li><li><strong>Rash+Slash:</strong> An action-oriented mode that pits you against incoming enemy robots. Use your trusty katana to cut your way through the enemy!</li><li><strong>Assault:</strong> A beat-em-up mode that throws you into the heat of battle, challening players to survive a gauntlet of robots and enemy soldiers that are armed to the helmet with special attacks, a variety of weapons and keep on coming in waves.</li><li><strong>Mecha:</strong> Like Freestyle, but in the open skies above the city. Reflect, find your groove and enjoy the view.</li><li><strong>Armament:</strong> An action-oriented mode that has you defending the skies with your Mech airship. Take out the incoming robots with your blasters!</li></ul>
+<p><img src="https://img.itch.zone/aW1nLzIwMjE4NDAucG5n/original/FAVv4U.png" loading="lazy"></p>
+<p>In order to add your own music you must have the following: an mp3 format music file, the file renamed to "track1", "track2", "track3", "track4"&nbsp;or "track5", and finally the file must be added to the game's included Music folder. Once the game is run it'll automatically load up these tracks sequentially as you begin to cruise. If you want to play another song, simply stop cruising and begin again to "skip" that track!<br></p>
+<p>If you enjoy the music as much as I do,give <a href="https://soundcloud.com/quantumdylan" target="_blank" referrerpolicy="origin" rel="nofollow noopener">Quantum Dylan</a> a listen!</p>
+<p><br></p>
+<p>Special&nbsp;Thanks: Carrie Heeter, Elizabeth LaPensee, Andrew Dennis, Casey O'Donnell, and Willow for being a great BUNDLER</p>
+<p>
+</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

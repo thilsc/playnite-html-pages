@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Spirits of Xanadu</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('91e6d005-78eb-4589-8567-30a482491688/b853f005-60fd-4a95-9387-3d17d4f47ce1.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img alt="icon" Height="48" class="lozad" data-src="91e6d005-78eb-4589-8567-30a482491688/bcdf9efb-41a6-49a6-8ada-83607e3f36b3.jpg"/> Spirits of Xanadu</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img alt="cover" Height="175" class="lozad" data-src="91e6d005-78eb-4589-8567-30a482491688/40d0ae9e-295c-422a-9c4b-9525d5203f00.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="#quicklink-04/04/2025">04/04/2025</a> 0:19:53</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="#quicklink-04/04/2025">04/04/2025</a> 0:21:27</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="#quicklink-22/06/2015">22/06/2015</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="#quicklink-60">60</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="#quicklink-Adventure">Adventure</a><br/><a href="#quicklink-Arcade">Arcade</a><br/><a href="#quicklink-Indie">Indie</a><br/><a href="#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="#quicklink-Nightdive Studios">Nightdive Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="#quicklink-Good Morning, Commander">Good Morning, Commander</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/312230" target="_blank">Steam</a><br/><a href="https://spiritsofxanadu.com" target="_blank">Official</a><br/><a href="https://allen.itch.io/spirits-of-xanadu" target="_blank">Itch</a><br/><a href="https://www.twitch.tv/directory/game/Spirits%20of%20Xanadu" target="_blank">Twitch</a><br/><a href="http://twitter.com/wiwyums" target="_blank">Twitter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[GGDeals] Synced">[GGDeals] Synced</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<p>
+	At the farthest edge of the explored universe, the research ship Xanadu slumbers in orbit around a mysterious planet. Her systems remain active but there has been no message from her crew for months. Now a lone operative has been sent to wake the Xanadu and bring her home to Earth. 
+	<br>
+	<br>
+	Spirits of Xanadu is an atmospheric exploration game set aboard a deserted starship in an alternate 1980s. It draws inspiration from classic sci-fi films, novels, and games to create an immersive and highly interactive environment, featuring puzzles and FPS elements in the service of a unique and layered plot.
+</p>
+<hr>
+<h2></h2>
+<h2>Key Features:</h2>
+<ul>
+	<li><strong>Three distinct endings</strong> <br>
+	You get to decide the ultimate fate of the Xanadu. 
+	</li>
+</ul>
+<ul>
+	<li><strong>Discover the truth</strong> <br>
+	Find out what happened to the crew of the Xanadu with fully voiced audiologs, as well as various company and personal documents and e-mails. 
+	</li>
+</ul>
+<ul>
+	<li><strong>Explore the Xanadu</strong> <br>
+	Non-linear gameplay and narrative with complete freedom. 
+	</li>
+</ul>
+<ul>
+	<li><strong>Hot robot action with first person shooter combat</strong> <br>
+	Avoid the ship's security system and battle several different types of robots in order to take control of the ship. 
+	</li>
+</ul>
+<ul>
+	<li><strong>Fully interactive environment</strong> <br>
+	Inspired by the immersive environment of games like Deus Ex and System Shock 2, open every drawer and interact with nearly every object. And yes, you can flush toilets. 
+	</li>
+</ul>
+<ul>
+	<li><strong>Optional 'Peaceful' mode</strong> <br>
+	Not a fan of violence against robots? Switch to the Peaceful difficulty setting to make the robots passive, which will allow you to explore the ship, absorb the story, and solve puzzles at your own leisure with no pressure. 
+	</li>
+</ul>
+<hr>
+<p><strong>System Requirements:</strong><br></p>
+<ul>
+	<li><strong>OS:</strong> Windows XP SP2 or later, Mac OS X 10.6+, Ubuntu/Mint</li>
+	<li><strong>Processor:</strong> 3 GHz dual-core or better </li>
+	<li><strong>Memory:</strong> 4 GB RAM </li>
+	<li><strong>Graphics:</strong> Dedicated graphics card with 512MB of VRAM and shader model 3.0 </li>
+	<li><strong>DirectX:</strong> Version 9.0c </li>
+	<li><strong>Hard Drive:</strong> 1 GB available space </li>
+</ul>
+<hr>
+<p>Developed by <a href="http://goodmorningcommander.com" referrerpolicy="origin" rel="nofollow noopener">Good Morning, Commander</a></p>
+<p>Published by <a href="http://nightdivestudios.com" referrerpolicy="origin" rel="nofollow noopener">Nightdive Studios</a></p>
+<p><strong> </strong><strong>Contact us by Email:</strong><br><a href="mailto:contact@goodmorningcommander.com" referrerpolicy="origin" rel="nofollow noopener"></a></p>
+<p><a href="mailto:contact@goodmorningcommander.com" referrerpolicy="origin" rel="nofollow noopener">contact@goodmorningcommander.com</a>
+</p>
+<p>
+	<strong>Follow us on Twitter:</strong><br>
+</p>
+<p>
+	 Allen: <a href="http://twitter.com/goodmorningcmdr" referrerpolicy="origin" rel="nofollow noopener">@goodmorningcmdr</a><br>
+	Lee: <a href="http://twitter.com/wiwyums" referrerpolicy="origin" rel="nofollow noopener">@wiwyums</a>
+</p>
+<hr>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

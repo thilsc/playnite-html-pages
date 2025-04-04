@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Blitz Breaker</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('023abb1a-d30c-447e-adcb-40c7393074c7/83b419ae-c01e-4164-91e3-996aaaa7254f.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img alt="icon" Height="48" class="lozad" data-src="023abb1a-d30c-447e-adcb-40c7393074c7/00b7b022-5d34-4b12-9bb8-adf986d93774.png"/> Blitz Breaker</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img alt="cover" Height="175" class="lozad" data-src="023abb1a-d30c-447e-adcb-40c7393074c7/906ef563-d022-4f6c-9401-55ebe5e3ba91.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="#quicklink-04/04/2025">04/04/2025</a> 0:19:57</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="#quicklink-04/04/2025">04/04/2025</a> 0:22:17</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="#quicklink-10/06/2015">10/06/2015</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="#quicklink-75">75</a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD><a href="#quicklink-Indie">Indie</a><br/><a href="#quicklink-Platform">Platform</a><br/><a href="#quicklink-Puzzle">Puzzle</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD><a href="#quicklink-Boncho Games">Boncho Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD><a href="#quicklink-Boncho Games">Boncho Games</a><br/><a href="#quicklink-EastAsiaSoft">EastAsiaSoft</a><br/><a href="#quicklink-Ratalaika Games">Ratalaika Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD><a href="#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="http://bonchogames.com/blitzbreaker" target="_blank">Official</a><br/><a href="https://store.steampowered.com/app/416110" target="_blank">Steam</a><br/><a href="https://boncho-games.itch.io/blitz-breaker" target="_blank">Itch</a><br/><a href="https://www.twitch.tv/directory/game/Blitz%20Breaker" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[GGDeals] Synced">[GGDeals] Synced</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<p><strong>An accessible, fast paced platformer with one small change, your character can't run! Play as a tiny robot named Blitz, and escape the factory where it seems everything is trying to break you.&nbsp;</strong><br></p>
+<p>
+	The gameplay is as simple as it is satisfying. Blitz can only jump, and perform an air dash in one of 4 directions. Upon colliding with an object that doesn't break you, you are free to dash again. Use this to navigate the challenges ahead and reach the portal at the end of the stage.
+</p>
+<hr>
+<p>
+			Please send all comments/inquires/bugs to bonchogames@gmail.com
+	<br>
+</p><p>Bluesky:&nbsp;<a href="https://bsky.app/profile/blekdar.bsky.social" rel="nofollow noopener" referrerpolicy="origin">https://bsky.app/profile/blekdar.bsky.social</a></p>
+<p>Not Twitter:&nbsp;<a href="https://x.com/blekdar" rel="nofollow noopener" referrerpolicy="origin">https://x.com/blekdar</a></p>
+<p><a href="https://www.nintendo.com/games/detail/blitz-breaker-switch/" target="_blank" rel="nofollow noopener" referrerpolicy="origin"><img src="https://img.itch.zone/aW1nLzY0MjI5OTEucG5n/original/hcf%2BqL.png" loading="lazy"></a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<a href="https://www.xbox.com/en-CA/games/store/blitz-breaker/9mxcvrtbqqjc" target="_blank" rel="nofollow noopener" referrerpolicy="origin"><img src="https://img.itch.zone/aW1nLzY0MjI5OTkucG5n/original/V4BJI9.png" loading="lazy"></a>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<a href="https://store.playstation.com/en-ca/product/UP2005-PPSA03965_00-BLITZBREAKER0000" target="_blank" rel="nofollow noopener" referrerpolicy="origin"><img src="https://img.itch.zone/aW1nLzY0NjEyNDUucG5n/original/YbNJv7.png" loading="lazy"></a><br></p>
+<hr>
+<h3>
+<em>Features in the final version:</em></h3>
+<blockquote>
+	- Simple, accessible PC controls. Both keyboard and gamepad are supported, and the entire game can be played one handed.
+	<br>
+	- Simple touch controls. Tap and swipe gestures are all you need to play on mobile. 	
+	<br>
+	- 101 levels with tough, but fair difficulty.
+	<br>
+	- Over 20 heads to collect, some with more interesting changes than others.
+	<br>
+	- Secret warp zones to find and conquer.
+	<br>
+	- A wicked chiptune soundtrack by 
+	<a href="http://www.fatbardmusic.com/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Fat Bard</a>
+</blockquote>
+<hr>
+<h3>
+<em>Soundtrack:</em></h3>
+<blockquote>
+	<button itchio="" aria-label="Click to activate iframe embed" type="button" class="embed_preload other_embed" title="https://bandcamp.com/EmbeddedPlayer/album=3324839768/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" data-embed_code="<iframe style=&quot;border: 0; width: 100%; height: 120px&quot; src=&quot;https://bandcamp.com/EmbeddedPlayer/album=3324839768/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/&quot;>
+	&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;a href=&amp;quot;&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;a href=&amp;quot;&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;a href=&amp;quot;&amp;lt;a href=&amp;quot;&amp;lt;a href=&amp;quot; &amp;lt;a=&amp;quot;&amp;quot;&amp;gt;http://fatbard.bandcamp.com/album/blitz-breaker-os&amp;lt;/a&amp;gt;t&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;&amp;lt;a href=&amp;quot; http:=&amp;quot;&amp;quot; fatbard.bandcamp.com=&amp;quot;&amp;quot; album=&amp;quot;&amp;quot; blitz-breaker-os.&amp;quot;=&amp;quot;&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href=&amp;quot;&amp;lt;a href=&amp;quot; http:=&amp;quot;&amp;quot; fatbard.bandcamp.com=&amp;quot;&amp;quot; album=&amp;quot;&amp;quot; blitz-breaker-os..&amp;quot;=&amp;quot;&amp;quot;&amp;gt;http://fatbard.bandcamp.com/album/blitz-breaker-os...&amp;lt;/a&amp;gt;&amp;quot;&amp;gt;http://fatbard.bandcamp.com/album/blitz-breaker-os.....&amp;quot;&amp;gt;http://fatbard.bandcamp.com/album/blitz-breaker-os....&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;http://fatbard.bandcamp.com/album/blitz-breaker-os.&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href=&amp;quot;&amp;lt;a href=&amp;quot; http:=&amp;quot;&amp;quot; fatbard.bandcamp.com=&amp;quot;&amp;quot; album=&amp;quot;&amp;quot; blitz-breaker-os..&amp;quot;=&amp;quot;&amp;quot;&amp;gt;http://fatbard.bandcamp.com/album/blitz-breaker-os...&amp;lt;/a&amp;gt;&amp;quot;&amp;gt;&amp;lt;a href=&amp;quot;http://fatbard.bandcamp.com/album/blitz-breaker-os.....&amp;quot;&amp;gt;http://fatbard.bandcamp.com/album/blitz-breaker-os...&amp;lt;/a&amp;gt;.&amp;quot;&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;/a&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;a href=&amp;quot;http://fatbard.bandcamp.com/album/blitz-breaker-os..&amp;quot;&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;http://fatbard.bandcamp.com/album/blitz-breaker-os...&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;/a&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;.&amp;quot;&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;http://fatbard.bandcamp.com/album/blitz-breaker-os...&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;/a&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;&amp;quot;&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;Blitz Breaker OST by Fat Bard&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;/a&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;gt;
+	</iframe>" style="height: 168px; width: 300px"><div class="embed_url">https://bandcamp.com/EmbeddedPlayer/album=3324839768/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/</div></button>
+</blockquote>
+<hr>
+<h3>
+<em>Streamers/Let's Players/Press:</em><br>
+</h3>
+<blockquote>
+	- Feel free to create, post, and monetize videos of Blitz Breaker. Please just include a link to this page or 
+	<a href="http://bonchogames.com/blitzbreaker" rel="nofollow noopener" referrerpolicy="origin">http://bonchogames.com/blitzbreaker</a><br>
+	- Want to request some steam keys for your channel/website? Just fill out the request here: 
+	<br>
+	<a href="https://dodistribute.com/access/QxdLI1txTI/" rel="nofollow noopener" referrerpolicy="origin">https://dodistribute.com/access/QxdLI1txTI/</a>
+</blockquote>
+<hr>
+<h3>
+<em>Credits:</em><br>
+</h3>
+<blockquote>
+	Reece Kelly - 
+	<a href="https://twitter.com/blekdar" target="_blank" rel="nofollow noopener" referrerpolicy="origin">@blekdar</a> - <a href="http://bonchogames.com/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">https://linktr.ee/Bonchogames</a><span></span><br>
+	- Game Design, art, play tester
+	<br>
+	<br>
+	Fatbard - 
+	<a href="https://twitter.com/Fat_Bard" target="_blank" rel="nofollow noopener" referrerpolicy="origin">@fat_bard</a> - <a href="http://www.fatbardmusic.com/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">http://www.fatbardmusic.com/</a><span></span><br>
+	- Sound design, music design, play tester
+	<br>
+	<br>
+	Luciana Nascimento - 
+	<a href="https://twitter.com/viiolaceus" rel="nofollow noopener" referrerpolicy="origin">@<span>viiolaceus</span></a> - <a href="http://luciananascimento.com/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">http://luciananascimento.com/</a><span></span><br>
+	- Box art
+	<br>
+	<br>
+	Dyre - 
+	<a href="https://twitter.com/OIDyre" target="_blank" rel="nofollow noopener" referrerpolicy="origin">@OIDyre</a> - <a href="http://coffeedaydreams.tumblr.com/" rel="nofollow noopener" referrerpolicy="origin">http://coffeedaydreams.tumblr.com/</a> <br>
+	- Cabinet art
+	<br>
+	<br>
+	Jeremy Hobbs - 
+	<a href="https://twitter.com/just_awful" target="_blank" rel="nofollow noopener" referrerpolicy="origin">@just_awful</a> - <a href="http://www.ribbonblack.com/" rel="nofollow noopener" referrerpolicy="origin">http://www.ribbonblack.com/</a><br>
+	- Cabinet art
+</blockquote>
+<hr>
+<h3><em>Play the current build of the demo:</em></h3>
+<blockquote>
+	- On Newgrounds: 
+	<a href="http://www.newgrounds.com/portal/view/669904" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Click here</a>
+</blockquote>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>

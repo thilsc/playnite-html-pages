@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>AIdol: Artificial Intelligence Idol</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('13bcf511-7905-48eb-84db-8c2bfca6e927/544dd676-0b91-4c3a-89d4-559492cb5637.png');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img alt="icon" Height="48" class="lozad" data-src="13bcf511-7905-48eb-84db-8c2bfca6e927/df87b477-828e-4d44-8906-4368ddfe177d.png"/> AIdol: Artificial Intelligence Idol</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Detalhes</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img alt="cover" Height="175" class="lozad" data-src="13bcf511-7905-48eb-84db-8c2bfca6e927/37ebebde-2b38-4f77-b462-26cecfc8e25e.png"/></TD>
+							</TR>
+							<TR>
+								<TD>Tempo de jogo</TD>
+								<TD>N&#227;o Jogado</TD>
+							</TR>
+							<TR>
+								<TD>Última Atividade</TD>
+								<TD><a href="#quicklink-Nunca">Nunca</a> </TD>
+							</TR>
+							<TR>
+								<TD>Adicionado</TD>
+								<TD><a href="#quicklink-04/04/2025">04/04/2025</a> 0:19:52</TD>
+							</TR>
+							<TR>
+								<TD>Modificado</TD>
+								<TD><a href="#quicklink-04/04/2025">04/04/2025</a> 0:21:03</TD>
+							</TR>
+							<TR>
+								<TD>Status de Conclusão</TD>
+								<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Biblioteca</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascendente_name_ascendente.html#quicklink-Itch.io">Itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Fonte</TD>
+								<TD><a href="default%20list%20text_source_ascendente_name_ascendente.html#quicklink-itch.io">itch.io</a></TD>
+							</TR>
+							<TR>
+								<TD>Plataforma</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascendente_name_ascendente.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Data de Lançamento</TD>
+								<TD><a href="#quicklink-24/04/2018">24/04/2018</a> </TD>
+							</TR>
+							<TR>
+								<TD>Pontuação da Comunidade</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Avaliação da crítica</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Pontuação do Usuário</TD>
+								<TD><a href="#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Gênero</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Desenvolvedor</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Editor</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Funções</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="#quicklink-[GGDeals] Synced">[GGDeals] Synced</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Descri&#231;&#227;o</H3>
+				</div>
+				<div class="description">
+					<h1 class="text-center"><a href="https://mysterycorgi.itch.io/aidol-artificial-intelligence-idol-a-visual-novel" target="_blank">&gt;&gt; Demo Here &lt;&lt;</a></h1>
+<p></p>
+<p><img src="https://steamcdn-a.akamaihd.net/steam/apps/829210/extras/story.png?t=1524518310" loading="lazy"><br>Set fifteen minutes into the future, AIdol is about a new craze that’s been sweeping Japan: virtual idols.<br><br>Virtual idols look like normal humans, but they’re made of wire and circuitry. They can sing better, dance better, and entertain better than any human could ever hope to, and their devotion to their jobs is unfailing.<br><br>The protagonist, Hana, is a young high school student who loves virtual idols - particularly Aiko. Aiko is the postergirl of the famous company Lyriq, and one of the most popular virtual idols to ever exist. Aiko is the nation’s darling, and though Hana adores her, she knows she’ll never get a chance to speak to her. Aiko is simply too far out of her reach.<br><br>That is, until one day, when somebody claiming to be Aiko starts sending Hana text messages asking for help. Aiko tells Hana that she’s in severe danger of malfunctioning, and the only person who can save her is her original programmer… but nobody seems to know where they are, and nobody is willing to help her.<br><br>Left with no alternatives, it’s up to Hana (and an eclectic cast of characters she meets along the way) to save Aiko from being turned into scrap metal!<br><br><img src="https://steamcdn-a.akamaihd.net/steam/apps/829210/extras/info.png?t=1524518310" loading="lazy"></p>
+<ul><li>A sweet, family-friendly story about making friends, going on adventures, and the power of music!</li><li>Written by <a href="https://ebihime.itch.io">ebi-hime</a>, the author of&nbsp;<a href="http://store.steampowered.com/app/407340/Strawberry_Vinegar/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Strawberry Vinegar</a>&nbsp;and&nbsp;<a href="http://store.steampowered.com/app/716340/Blackberry_Honey/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Blackberry Honey</a></li><li>A large cast of adorable characters drawn by <a href="http://twitter.com/melowbee?lang=en" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Melowbee</a>, the artist behind&nbsp;<a href="http://store.steampowered.com/app/585880/Once_on_a_windswept_night/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Windswept Night</a></li><li>A custom soundtrack by <a href="http://mockoff.bandcamp.com/" target="_blank" rel="nofollow noopener" referrerpolicy="origin">Mock Off</a>, featuring an insert song by Vocaloid composer <a href="http://www.youtube.com/nostraightanswer" target="_blank" rel="nofollow noopener" referrerpolicy="origin">nostraightanswer (Kenji-B)</a></li><li>Numerous choices, branching endings, and character-specific epilogues to obtain</li><li>In-game music and CG gallery</li><li>Lots of cute girls (and some cute boys)!!!</li></ul>
+<p><img src="https://steamcdn-a.akamaihd.net/steam/apps/829210/extras/chibi2.png?t=1524518310" loading="lazy"></p>
+<p class="text-center"><strong>Content&nbsp;Guidance</strong></p>
+<p>This guidance is provided in the hopes of assisting consumers make informed purchases. Please exercise discretion when interacting with visual novels and other downloadable games.&nbsp; While this title is intended to be safe for <strong>all ages</strong>, regional or cultural differences require potential players to practice due&nbsp;diligence when deciding if this title is right for them.&nbsp; If you are a minor&nbsp;(as defined by your local and regional laws), please get approval from an&nbsp;adult before purchasing or installing executable programs, including any&nbsp;games and visual novels you might find online.<br></p>
+<p>While AIdol is generally intended to be family-friendly, some sensitive topics are present, including but not limited to:</p>
+<ul><li>lots of pink<br>
+</li><li>A soft science fiction story set 15 minutes in the future</li><li>an idealistic, fantasy&nbsp;version of the idol industry</li><li>A shady corporate executive</li><li>interpersonal office drama</li><li>Employee scapegoating&nbsp;and wrongful termination&nbsp;</li><li>Enthusiastically supportive parental units</li><li>QUILTBAG (aka queer /&nbsp;LGBTQUIA+) Characters</li><li>Characters with disabilities</li><li>Infidelity&nbsp;(involving side characters)</li><li>References to sexuality, implied sexual behavior&nbsp;(involving side characters)</li><li>Conventions and subcultures&nbsp;(Idol fandom, Cosplayers and&nbsp;<span>Lolita fashion)</span><span></span></li><li>Existential and ethical questions regarding AI</li><li>Platonic friendship routes (no romantic routes)</li></ul>
+<p>Remember to stay&nbsp; hydrated, rest your eyes, and&nbsp;take breaks as need be to keep yourself mentally and physically well.&nbsp;It's always okay to stop playing any game&nbsp;for any reason, any time, so don't feel bad if it's not right for you.&nbsp;<br></p>
+<p>This game does not&nbsp;require an internet connection. This game does not collect player data.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
